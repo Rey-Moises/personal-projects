@@ -259,6 +259,118 @@
       .stats-inner{grid-template-columns:1fr 1fr}
       .stat-num{font-size:2rem}
     }
+
+    /* ── Contact Modal ───────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(42,28,16,.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      width: 100%;
+      max-width: 380px;
+      box-sizing: border-box;
+      text-align: center;
+      box-shadow: 0 24px 80px rgba(61,35,20,.25);
+      animation: modalIn .25s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform:translateY(16px) scale(.97); }
+      to   { opacity:1; transform:none; }
+    }
+    .modal-close {
+      position: absolute;
+      top: .85rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.3rem; cursor: pointer;
+      color: var(--text-faint); line-height: 1;
+    }
+    .modal-close:hover { color: var(--orange); }
+    .modal-capy { font-size: 2.5rem; margin-bottom: .4rem; }
+    .modal-title {
+      font-family: var(--fd);
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: var(--brown);
+      letter-spacing: -.02em;
+      margin-bottom: .25rem;
+    }
+    .modal-sub {
+      color: var(--text-faint);
+      font-size: .82rem;
+      margin-bottom: 1.5rem;
+    }
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      padding: .75rem 1rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      text-decoration: none;
+      transition: border-color .2s, background .2s, transform .15s;
+      background: var(--cream);
+      box-sizing: border-box;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .social-link:hover {
+      border-color: var(--orange);
+      background: rgba(232,97,26,.05);
+      transform: translateX(3px);
+      text-decoration: none;
+    }
+    .social-link .s-icon {
+      font-size: 1.25rem;
+      width: 30px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .social-link .s-info {
+      text-align: left;
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+    }
+    .social-link .s-label {
+      font-size: .7rem;
+      color: var(--text-faint);
+      font-weight: 600;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .social-link .s-value {
+      font-size: .85rem;
+      color: var(--brown);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .modal-note {
+      margin-top: 1rem;
+      font-size: .75rem;
+      color: var(--text-faint);
+    }
   </style>
 </head>
 <body>
@@ -431,13 +543,13 @@
         <div class="svc-desc">Clean, fast, mobile-friendly sites deployed on your domain. Perfect for businesses, portfolios, or product pages.</div>
         <div class="svc-footer"><span class="svc-price">From $80</span><span class="svc-arr">↗</span></div>
       </a>
-      <a href="#design" class="svc-card reveal reveal-delay-1" data-c="y">
+      <a href="mailto:sebastian.reymoises.gandia@gmail.com?subject=Service%20Inquiry" class="svc-card reveal reveal-delay-1" data-c="y">
         <span class="svc-icon">🎨</span>
         <div class="svc-title">Logo & Photo Editing</div>
         <div class="svc-desc">Logo design, background removal, product photo cleanup, and social media graphics. Fast turnaround.</div>
         <div class="svc-footer"><span class="svc-price">From $5 · via email</span><span class="svc-arr">✉</span></div>
       </a>
-      <a href="#presentations" class="svc-card reveal reveal-delay-2" data-c="g">
+      <a href="mailto:sebastian.reymoises.gandia@gmail.com?subject=Service%20Inquiry" class="svc-card reveal reveal-delay-2" data-c="g">
         <span class="svc-icon">📊</span>
         <div class="svc-title">Presentations</div>
         <div class="svc-desc">PowerPoint or Google Slides for business pitches, school reports, or product demos. Clean and readable.</div>
@@ -507,7 +619,7 @@
         <li><span class="det-ck">✓</span> PNG, JPG, and PDF delivery</li>
         <li><span class="det-ck">✓</span> Fast — usually same day</li>
       </ul>
-      <a href="mailto:Sebastian.reymoises.gandia@gmail.com?subject=Fiverr%20Inquiry" class="btn btn-orange btn-sm">📧 Contact via Email →</a>
+      <a href="#" onclick="openContact(event)" class="btn btn-orange btn-sm">📧 Contact Me →</a>
     </div>
   </div>
 </section>
@@ -533,7 +645,7 @@
         <li><span class="det-ck">✓</span> Speaker notes on request</li>
         <li><span class="det-ck">✓</span> 2 revisions</li>
       </ul>
-      <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank" class="btn btn-orange btn-sm">Order on Fiverr →</a>
+      <a href="#" onclick="openContact(event)" class="btn btn-orange btn-sm">📧 Contact Me →</a>
     </div>
   </div>
 </section>
@@ -755,7 +867,7 @@
           <div class="about-row">📍 Cavite City, Calabarzon, Philippines</div>
           <div class="about-row">🎓 BSIT — Cavite State University (2028)</div>
           <div class="about-row">🏅 Senior High Honors Graduate, 2024</div>
-          <div class="about-row">📧 <a href="mailto:Sebastian.reymoises.gandia@gmail.com">Sebastian.reymoises.gandia@gmail.com</a></div>
+          <div class="about-row">📧 <a href="mailto:sebastian.reymoises.gandia@gmail.com">sebastian.reymoises.gandia@gmail.com</a></div>
           <div class="about-row">💼 <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank">Fiverr Profile →</a></div>
         </div>
       </div>
@@ -875,7 +987,7 @@
       <div>
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
-          <li><a href="mailto:Sebastian.reymoises.gandia@gmail.com">Email Me</a></li>
+          <li><a href="mailto:sebastian.reymoises.gandia@gmail.com">Email Me</a></li>
           <li><a href="https://www.fiverr.com/sellers/rey_moises" target="_blank">Fiverr Message</a></li>
         </ul>
       </div>
@@ -884,7 +996,7 @@
       <div>© 2026 Rey Moises Sebastian · nutterbutters.uk</div>
       <div class="footer-socials">
         <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank" class="footer-social" title="Fiverr">💼</a>
-        <a href="mailto:Sebastian.reymoises.gandia@gmail.com" class="footer-social" title="Email">✉️</a>
+        <a href="#" onclick="openContact(event)" class="footer-social" title="Contact">✉️</a>
       </div>
     </div>
   </div>
@@ -920,6 +1032,65 @@
     secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id});
     nls.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--orange)':''});
   },{ passive:true });
+
+  // Contact modal
+  function openContact(e) {
+    if(e) e.preventDefault();
+    document.getElementById('contact-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if(e && e.target !== document.getElementById('contact-modal')) return;
+    document.getElementById('contact-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') {
+      document.getElementById('contact-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
 </script>
+
+<!-- ── Contact Modal ────────────────────────────────── -->
+<div class="modal-overlay" id="contact-modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('contact-modal').classList.remove('open')">×</button>
+    <div class="modal-capy">🐾</div>
+    <div class="modal-title">Let's work together</div>
+    <p class="modal-sub">Pick how you'd like to reach Moises</p>
+    <div class="social-links">
+      <a href="mailto:sebastian.reymoises.gandia@gmail.com?subject=Service%20Inquiry" class="social-link">
+        <span class="s-icon">✉️</span>
+        <div class="s-info">
+          <span class="s-label">Email</span>
+          <span class="s-value">sebastian.reymoises.gandia@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/rey-moises-sebastian" target="_blank" class="social-link">
+        <span class="s-icon">💼</span>
+        <div class="s-info">
+          <span class="s-label">LinkedIn</span>
+          <span class="s-value">Rey Moises Sebastian</span>
+        </div>
+      </a>
+      <a href="https://github.com/rey-moises" target="_blank" class="social-link">
+        <span class="s-icon">🐙</span>
+        <div class="s-info">
+          <span class="s-label">GitHub</span>
+          <span class="s-value">github.com/rey-moises</span>
+        </div>
+      </a>
+      <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank" class="social-link">
+        <span class="s-icon">🟢</span>
+        <div class="s-info">
+          <span class="s-label">Fiverr</span>
+          <span class="s-value">fiverr.com/sellers/rey_moises</span>
+        </div>
+      </a>
+    </div>
+    <p class="modal-note">Usually replies within 24 hours 🇵🇭</p>
+  </div>
+</div>
 </body>
 </html>
