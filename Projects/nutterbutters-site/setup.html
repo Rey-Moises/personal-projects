@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2720%27%20fill%3D%27%25238B5E3C%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2765%27%20rx%3D%2730%27%20ry%3D%2722%27%20fill%3D%27%25237A4F2D%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2740%27%20rx%3D%2722%27%20ry%3D%2719%27%20fill%3D%27%25238B5E3C%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2750%27%20rx%3D%2714%27%20ry%3D%279%27%20fill%3D%27%2523A0714F%27/%3E%3Ccircle%20cx%3D%2745%27%20cy%3D%2749%27%20r%3D%272%27%20fill%3D%27%25235C3317%27/%3E%3Ccircle%20cx%3D%2755%27%20cy%3D%2749%27%20r%3D%272%27%20fill%3D%27%25235C3317%27/%3E%3Ccircle%20cx%3D%2743%27%20cy%3D%2736%27%20r%3D%273.5%27%20fill%3D%27white%27/%3E%3Ccircle%20cx%3D%2757%27%20cy%3D%2736%27%20r%3D%273.5%27%20fill%3D%27white%27/%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%2736%27%20r%3D%272%27%20fill%3D%27%25232a1a08%27/%3E%3Ccircle%20cx%3D%2758%27%20cy%3D%2736%27%20r%3D%272%27%20fill%3D%27%25232a1a08%27/%3E%3Ccircle%20cx%3D%2745%27%20cy%3D%2735%27%20r%3D%27.9%27%20fill%3D%27white%27/%3E%3Ccircle%20cx%3D%2759%27%20cy%3D%2735%27%20r%3D%27.9%27%20fill%3D%27white%27/%3E%3Cellipse%20cx%3D%2731%27%20cy%3D%2726%27%20rx%3D%277%27%20ry%3D%275%27%20fill%3D%27%25237A4F2D%27%20transform%3D%27rotate%28-15%2031%2026%29%27/%3E%3Cellipse%20cx%3D%2769%27%20cy%3D%2726%27%20rx%3D%277%27%20ry%3D%275%27%20fill%3D%27%25237A4F2D%27%20transform%3D%27rotate%2815%2069%2026%29%27/%3E%3Cellipse%20cx%3D%2731%27%20cy%3D%2726%27%20rx%3D%274%27%20ry%3D%273%27%20fill%3D%27%2523C4845A%27%20transform%3D%27rotate%28-15%2031%2026%29%27/%3E%3Cellipse%20cx%3D%2769%27%20cy%3D%2726%27%20rx%3D%274%27%20ry%3D%273%27%20fill%3D%27%2523C4845A%27%20transform%3D%27rotate%2815%2069%2026%29%27/%3E%3Crect%20x%3D%2725%27%20y%3D%2778%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Crect%20x%3D%2739%27%20y%3D%2780%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Crect%20x%3D%2752%27%20y%3D%2780%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Crect%20x%3D%2766%27%20y%3D%2778%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Cpath%20d%3D%27M44%2054%20Q50%2058%2056%2054%27%20stroke%3D%27%25235C3317%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20fill%3D%27none%27/%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2722%27%20r%3D%274%27%20fill%3D%27%2523f5c842%27%20opacity%3D%27.9%27/%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2716%27%20r%3D%273%27%20fill%3D%27white%27%20opacity%3D%27.8%27/%3E%3Ccircle%20cx%3D%2755%27%20cy%3D%2719%27%20r%3D%273%27%20fill%3D%27white%27%20opacity%3D%27.8%27/%3E%3Ccircle%20cx%3D%2745%27%20cy%3D%2719%27%20r%3D%273%27%20fill%3D%27white%27%20opacity%3D%27.8%27/%3E%3C/svg%3E"/>
+  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2720%27%20fill%3D%27%25238B5E3C%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2765%27%20rx%3D%2730%27%20ry%3D%2722%27%20fill%3D%27%25237A4F2D%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2740%27%20rx%3D%2722%27%20ry%3D%2719%27%20fill%3D%27%25238B5E3C%27/%3E%3Cellipse%20cx%3D%2750%27%20cy%3D%2750%27%20rx%3D%2714%27%20ry%3D%279%27%20fill%3D%27%2523A0714F%27/%3E%3Ccircle%20cx%3D%2745%27%20cy%3D%2749%27%20r%3D%272%27%20fill%3D%27%25235C3317%27/%3E%3Ccircle%20cx%3D%2755%27%20cy%3D%2749%27%20r%3D%272%27%20fill%3D%27%25235C3317%27/%3E%3Ccircle%20cx%3D%2743%27%20cy%3D%2736%27%20r%3D%273.5%27%20fill%3D%27white%27/%3E%3Ccircle%20cx%3D%2757%27%20cy%3D%2736%27%20r%3D%273.5%27%20fill%3D%27white%27/%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%2736%27%20r%3D%272%27%20fill%3D%27%25232a1a08%27/%3E%3Ccircle%20cx%3D%2758%27%20cy%3D%2736%27%20r%3D%272%27%20fill%3D%27%25232a1a08%27/%3E%3Ccircle%20cx%3D%2745%27%20cy%3D%2735%27%20r%3D%27.9%27%20fill%3D%27white%27/%3E%3Ccircle%20cx%3D%2759%27%20cy%3D%2735%27%20r%3D%27.9%27%20fill%3D%27white%27/%3E%3Cellipse%20cx%3D%2731%27%20cy%3D%2726%27%20rx%3D%277%27%20ry%3D%275%27%20fill%3D%27%25237A4F2D%27%20transform%3D%27rotate%28-15%2031%2026%29%27/%3E%3Cellipse%20cx%3D%2769%27%20cy%3D%2726%27%20rx%3D%277%27%20ry%3D%275%27%20fill%3D%27%25237A4F2D%27%20transform%3D%27rotate%2815%2069%2026%29%27/%3E%3Cellipse%20cx%3D%2731%27%20cy%3D%2726%27%20rx%3D%274%27%20ry%3D%273%27%20fill%3D%27%2523C4845A%27%20transform%3D%27rotate%28-15%2031%2026%29%27/%3E%3Cellipse%20cx%3D%2769%27%20cy%3D%2726%27%20rx%3D%274%27%20ry%3D%273%27%20fill%3D%27%2523C4845A%27%20transform%3D%27rotate%2815%2069%2026%29%27/%3E%3Crect%20x%3D%2725%27%20y%3D%2778%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Crect%20x%3D%2739%27%20y%3D%2780%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Crect%20x%3D%2752%27%20y%3D%2780%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Crect%20x%3D%2766%27%20y%3D%2778%27%20width%3D%2711%27%20height%3D%2714%27%20rx%3D%275%27%20fill%3D%27%25237A4F2D%27/%3E%3Cpath%20d%3D%27M44%2054%20Q50%2058%2056%2054%27%20stroke%3D%27%25235C3317%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20fill%3D%27none%27/%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2722%27%20r%3D%274%27%20fill%3D%27%2523f5c842%27%20opacity%3D%27.9%27/%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2716%27%20r%3D%273%27%20fill%3D%27white%27%20opacity%3D%27.8%27/%3E%3Ccircle%20cx%3D%2755%27%20cy%3D%2719%27%20r%3D%273%27%20fill%3D%27white%27%20opacity%3D%27.8%27/%3E%3Ccircle%20cx%3D%2745%27%20cy%3D%2719%27%20r%3D%273%27%20fill%3D%27white%27%20opacity%3D%27.8%27/%3E%3C/svg%3E"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ProPHBot Setup Guide — NutterButters</title>
+  <meta name="description" content="Step-by-step setup guide for ProPHBot — PH affiliate automation bot by NutterButters."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    :root{
+      --cream:#fdf8f0;--cream2:#f5ede0;--cream3:#ede0cc;
+      --brown:#3d2314;--brown2:#6b3a1f;--brown3:#2a1709;
+      --orange:#e8611a;--orange2:#c44e0e;
+      --green:#2d5a27;--green2:#3d7a35;--green-light:rgba(45,90,39,.1);
+      --yellow:#f5c842;
+      --red:#dc2626;--red-light:rgba(220,38,38,.1);
+      --blue:#2563eb;--blue-light:rgba(37,99,235,.1);
+      --text:#1e1208;--text-dim:#7a5c42;--text-faint:#b39278;
+      --border:#e0cdb8;--border2:#c9b49a;
+      --terminal-bg:#1a1208;--terminal-text:#e8d5b7;
+      --r:14px;--r-sm:8px;
+      --fd:'Fraunces',Georgia,serif;
+      --fb:'Plus Jakarta Sans',sans-serif;
+      --fm:'JetBrains Mono',monospace;
+      --shadow:0 4px 24px rgba(61,35,20,.1);
+    }
+    body{background:var(--cream);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.6}
+    a{color:var(--orange);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ── TOP BAR ── */
+    .topbar{background:var(--brown3);color:rgba(255,255,255,.7);font-size:.8rem;padding:.6rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .topbar-brand{display:flex;align-items:center;gap:.5rem;color:#fff;font-family:var(--fd);font-weight:700;font-size:.95rem}
+    .topbar-brand span{color:var(--yellow)}
+    .topbar-links{display:flex;gap:1.25rem}
+    .topbar-links a{color:rgba(255,255,255,.6);font-size:.8rem;transition:color .2s}
+    .topbar-links a:hover{color:#fff;text-decoration:none}
+
+    /* ── HERO ── */
+    .hero{background:var(--brown);padding:3.5rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.1) 0%,transparent 65%);top:-200px;left:50%;transform:translateX(-50%);pointer-events:none}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(232,97,26,.2);border:1px solid rgba(232,97,26,.3);color:var(--orange);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .85rem;border-radius:50px;margin-bottom:1.2rem}
+    .hero h1{font-family:var(--fd);font-weight:900;font-size:clamp(2rem,5vw,3.2rem);color:#fff;letter-spacing:-.03em;line-height:1.1;margin-bottom:.85rem}
+    .hero h1 em{font-style:italic;color:var(--yellow)}
+    .hero-sub{color:rgba(255,255,255,.65);font-size:1rem;max-width:520px;margin:0 auto 2rem;line-height:1.65}
+    /* Progress overview */
+    .hero-progress{display:inline-flex;align-items:center;gap:1.5rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:.75rem 2rem;margin-bottom:.5rem}
+    .progress-num{font-family:var(--fd);font-weight:900;font-size:1.6rem;color:var(--yellow)}
+    .progress-label{font-size:.78rem;color:rgba(255,255,255,.5);text-align:left}
+    .progress-bar-wrap{width:200px;height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+    .progress-bar{height:100%;background:linear-gradient(90deg,var(--orange),var(--yellow));border-radius:3px;transition:width .4s ease}
+    .hero-reset{margin-top:.75rem;font-size:.75rem;color:rgba(255,255,255,.3);cursor:pointer;background:none;border:none;font-family:var(--fb)}
+    .hero-reset:hover{color:rgba(255,255,255,.6)}
+
+    /* ── LAYOUT ── */
+    .main{max-width:860px;margin:0 auto;padding:3rem 2rem 6rem}
+
+    /* ── INTRO BOX ── */
+    .intro-box{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:1.75rem;margin-bottom:2.5rem;display:flex;gap:1.25rem;align-items:flex-start}
+    .intro-icon{font-size:2rem;flex-shrink:0;margin-top:.1rem}
+    .intro-title{font-family:var(--fd);font-weight:700;font-size:1.1rem;color:var(--brown);margin-bottom:.4rem}
+    .intro-text{color:var(--text-dim);font-size:.9rem;line-height:1.65}
+    .intro-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem}
+    .intro-pill{font-size:.75rem;font-weight:600;padding:.25rem .7rem;border-radius:50px;border:1px solid var(--border);color:var(--text-dim);background:var(--cream2)}
+
+    /* ── STEP CARD ── */
+    .step{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);margin-bottom:1.25rem;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+    .step.done{border-color:var(--green2)}
+    .step.done .step-head{background:rgba(45,90,39,.04)}
+    .step-head{display:flex;align-items:center;gap:1rem;padding:1.35rem 1.5rem;cursor:pointer;user-select:none;transition:background .2s}
+    .step-head:hover{background:var(--cream2)}
+    .step-num{width:34px;height:34px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:900;font-size:.95rem;color:var(--text-faint);flex-shrink:0;transition:all .25s}
+    .step.done .step-num{background:var(--green);border-color:var(--green);color:#fff}
+    .step.active .step-num{background:var(--orange);border-color:var(--orange);color:#fff}
+    .step-meta{flex:1}
+    .step-title{font-family:var(--fd);font-weight:700;font-size:1.05rem;color:var(--brown);letter-spacing:-.01em}
+    .step-subtitle{font-size:.8rem;color:var(--text-faint);margin-top:.1rem}
+    .step-badge{font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:50px;margin-left:auto;flex-shrink:0}
+    .badge-done{background:var(--green-light);color:var(--green2);border:1px solid rgba(45,90,39,.2)}
+    .badge-todo{background:var(--cream2);color:var(--text-faint);border:1px solid var(--border)}
+    .badge-req{background:rgba(232,97,26,.1);color:var(--orange2);border:1px solid rgba(232,97,26,.2)}
+    .step-chevron{color:var(--text-faint);transition:transform .25s;flex-shrink:0;font-size:1rem}
+    .step.open .step-chevron{transform:rotate(180deg)}
+
+    /* Step body */
+    .step-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .step.open .step-body{max-height:2000px}
+    .step-content{padding:0 1.5rem 1.75rem;border-top:1px solid var(--border)}
+
+    /* Content blocks */
+    .block{margin-top:1.25rem}
+    .block-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);margin-bottom:.6rem}
+    p.text{color:var(--text-dim);font-size:.9rem;line-height:1.7;margin-bottom:.75rem}
+    p.text:last-child{margin-bottom:0}
+    p.text strong{color:var(--text);font-weight:600}
+
+    /* Terminal / code block */
+    .terminal{background:var(--terminal-bg);border-radius:var(--r-sm);overflow:hidden;margin:.75rem 0}
+    .terminal-bar{background:#2a1f12;padding:.55rem .9rem;display:flex;align-items:center;gap:.4rem}
+    .t-dot{width:9px;height:9px;border-radius:50%}
+    .t-dot:nth-child(1){background:#ff5f57}
+    .t-dot:nth-child(2){background:#febc2e}
+    .t-dot:nth-child(3){background:#28c840}
+    .t-label{margin-left:auto;font-size:.7rem;color:rgba(255,255,255,.25);font-family:var(--fm)}
+    .terminal-body{padding:1rem 1.1rem;font-family:var(--fm);font-size:.82rem;line-height:1.8;color:var(--terminal-text)}
+    .t-comment{color:rgba(232,97,26,.6)}
+    .t-cmd{color:#e8d5b7}
+    .t-out{color:rgba(232,213,183,.5)}
+    .t-ok{color:#4ade80}
+    .t-warn{color:var(--yellow)}
+    .t-err{color:#f87171}
+    .t-prompt{color:var(--orange);margin-right:.4rem}
+    /* Copy button */
+    .copy-wrap{position:relative}
+    .copy-btn{position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:.7rem;font-weight:600;padding:.25rem .65rem;border-radius:4px;cursor:pointer;font-family:var(--fb);transition:all .2s}
+    .copy-btn:hover{background:rgba(255,255,255,.14);color:#fff}
+    .copy-btn.copied{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.3);color:#4ade80}
+
+    /* Numbered instructions */
+    .steps-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-top:.75rem}
+    .steps-list li{display:flex;gap:.85rem;font-size:.9rem;color:var(--text-dim);line-height:1.6}
+    .steps-list li .num{width:22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+    .steps-list li strong{color:var(--text);font-weight:600}
+
+    /* Info / warning boxes */
+    .infobox{border-radius:var(--r-sm);padding:1rem 1.1rem;font-size:.875rem;margin:.75rem 0;display:flex;gap:.75rem;align-items:flex-start;line-height:1.65}
+    .infobox-icon{flex-shrink:0;font-size:1.1rem;margin-top:.05rem}
+    .infobox.info{background:var(--blue-light);border:1px solid rgba(37,99,235,.2);color:#1e40af}
+    .infobox.warn{background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.3);color:#854d0e}
+    .infobox.success{background:var(--green-light);border:1px solid rgba(45,90,39,.2);color:var(--green)}
+    .infobox.danger{background:var(--red-light);border:1px solid rgba(220,38,38,.2);color:var(--red)}
+
+    /* Troubleshoot toggle */
+    .trouble-toggle{display:flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:600;color:var(--text-faint);cursor:pointer;background:none;border:none;font-family:var(--fb);margin-top:1.1rem;padding:.5rem .85rem;border-radius:var(--r-sm);border:1px solid var(--border);transition:all .2s}
+    .trouble-toggle:hover{border-color:var(--orange);color:var(--orange)}
+    .trouble-body{background:var(--cream2);border:1px solid var(--border);border-radius:var(--r-sm);padding:1.1rem;margin-top:.5rem;display:none;font-size:.875rem;color:var(--text-dim)}
+    .trouble-body.open{display:block}
+    .trouble-body ul{margin-left:1rem;margin-top:.5rem}
+    .trouble-body ul li{margin-bottom:.4rem;line-height:1.6}
+    .trouble-body ul li strong{color:var(--text)}
+
+    /* Mark done button */
+    .mark-done-wrap{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+    .mark-done-btn{display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;font-weight:700;font-size:.9rem;padding:.65rem 1.4rem;border-radius:50px;border:none;cursor:pointer;font-family:var(--fb);transition:background .2s,transform .15s;box-shadow:0 3px 12px rgba(45,90,39,.25)}
+    .mark-done-btn:hover{background:var(--green2);transform:translateY(-1px)}
+    .mark-done-btn.undo{background:var(--cream2);color:var(--text-dim);border:1.5px solid var(--border);box-shadow:none}
+    .mark-done-btn.undo:hover{border-color:var(--red);color:var(--red)}
+    .next-hint{font-size:.8rem;color:var(--text-faint)}
+
+    /* ── COMING SOON SECTION ── */
+    .coming-section{margin-top:4rem;padding-top:4rem;border-top:2px dashed var(--border2)}
+    .coming-header{text-align:center;margin-bottom:3rem}
+    .coming-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(232,97,26,.1);border:1px solid rgba(232,97,26,.2);color:var(--orange2);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .85rem;border-radius:50px;margin-bottom:1rem}
+    .coming-title{font-family:var(--fd);font-weight:900;font-size:clamp(2rem,4vw,2.8rem);color:var(--brown);letter-spacing:-.03em;line-height:1.1}
+    .coming-title em{font-style:italic;color:var(--orange)}
+    .coming-sub{color:var(--text-dim);font-size:1rem;max-width:480px;margin:.75rem auto 0;line-height:1.65}
+
+    /* Dashboard mockup */
+    .dash-mockup{background:var(--brown3);border-radius:var(--r);overflow:hidden;box-shadow:0 20px 60px rgba(61,35,20,.3);margin-bottom:2.5rem;border:1px solid rgba(255,255,255,.06)}
+    .dash-topbar{background:#1f130a;padding:.65rem 1.25rem;display:flex;align-items:center;gap:.75rem;border-bottom:1px solid rgba(255,255,255,.06)}
+    .dash-dots{display:flex;gap:.4rem}
+    .dash-dot{width:10px;height:10px;border-radius:50%}
+    .dash-dot:nth-child(1){background:#ff5f57}
+    .dash-dot:nth-child(2){background:#febc2e}
+    .dash-dot:nth-child(3){background:#28c840}
+    .dash-url{flex:1;background:rgba(255,255,255,.06);border-radius:4px;padding:.25rem .75rem;font-family:var(--fm);font-size:.72rem;color:rgba(255,255,255,.3);text-align:center}
+    .dash-inner{display:grid;grid-template-columns:200px 1fr;min-height:360px}
+    .dash-sidebar{background:#1a1208;padding:1.25rem .85rem;border-right:1px solid rgba(255,255,255,.06)}
+    .dash-logo{font-family:var(--fd);font-weight:900;font-size:.95rem;color:#fff;padding:.5rem .5rem .85rem;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:.85rem}
+    .dash-logo span{color:var(--yellow)}
+    .dash-nav-item{display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:rgba(255,255,255,.4);padding:.55rem .65rem;border-radius:6px;margin-bottom:.15rem;cursor:default;transition:all .2s}
+    .dash-nav-item.active{background:rgba(232,97,26,.15);color:var(--orange)}
+    .dash-nav-item .icon{font-size:.9rem}
+    .dash-main{padding:1.5rem;overflow:hidden}
+    .dash-welcome{font-family:var(--fd);font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:1.1rem}
+    .dash-welcome span{color:var(--yellow)}
+    /* Stat cards in mockup */
+    .dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:1.1rem}
+    .dash-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.85rem .9rem}
+    .dash-stat-num{font-family:var(--fd);font-weight:900;font-size:1.6rem;color:#fff;line-height:1}
+    .dash-stat-num.orange{color:var(--orange)}
+    .dash-stat-num.green{color:#4ade80}
+    .dash-stat-num.yellow{color:var(--yellow)}
+    .dash-stat-label{font-size:.68rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.07em;margin-top:.2rem}
+    /* Activity feed */
+    .dash-feed{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.85rem .9rem}
+    .dash-feed-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:.65rem}
+    .dash-feed-item{display:flex;align-items:center;gap:.6rem;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .dash-feed-item:last-child{border-bottom:none}
+    .dash-feed-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .dash-feed-dot.ok{background:#4ade80}
+    .dash-feed-dot.warn{background:var(--yellow)}
+    .dash-feed-dot.run{background:var(--orange)}
+    .dash-feed-text{font-size:.73rem;color:rgba(255,255,255,.5);flex:1}
+    .dash-feed-time{font-size:.68rem;color:rgba(255,255,255,.2);font-family:var(--fm)}
+
+    /* Feature cards */
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+    .feat-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:1.5rem}
+    .feat-card.tier-free{border-color:var(--border)}
+    .feat-card.tier-basic{border-color:var(--orange)}
+    .feat-card.tier-pro{border-color:var(--yellow2);background:linear-gradient(135deg,#fffdf5,#fff)}
+    .feat-tier{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+    .feat-tier.free{color:var(--text-faint)}
+    .feat-tier.basic{color:var(--orange)}
+    .feat-tier.pro{color:var(--yellow2)}
+    .feat-title{font-family:var(--fd);font-weight:700;font-size:1.05rem;color:var(--brown);margin-bottom:.35rem}
+    .feat-price{font-family:var(--fd);font-weight:900;font-size:1.5rem;color:var(--brown);margin-bottom:.85rem}
+    .feat-price small{font-family:var(--fb);font-weight:400;font-size:.8rem;color:var(--text-faint)}
+    .feat-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .feat-list li{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--text-dim)}
+    .feat-list li .ck{color:var(--green);font-weight:700;flex-shrink:0}
+    .feat-list li .x{color:var(--border2);flex-shrink:0}
+
+    /* Waitlist box */
+    .waitlist-box{background:var(--brown);border-radius:var(--r);padding:2.5rem;text-align:center}
+    .waitlist-box h3{font-family:var(--fd);font-weight:900;font-size:1.6rem;color:#fff;letter-spacing:-.02em;margin-bottom:.5rem}
+    .waitlist-box p{color:rgba(255,255,255,.6);font-size:.9rem;margin-bottom:1.5rem}
+    .waitlist-form{display:flex;gap:.6rem;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+    .waitlist-input{flex:1;min-width:200px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:.7rem 1.2rem;color:#fff;font-family:var(--fb);font-size:.9rem;outline:none;transition:border-color .2s}
+    .waitlist-input::placeholder{color:rgba(255,255,255,.35)}
+    .waitlist-input:focus{border-color:var(--orange)}
+    .waitlist-btn{background:var(--orange);color:#fff;font-weight:700;font-size:.9rem;padding:.7rem 1.5rem;border-radius:50px;border:none;cursor:pointer;font-family:var(--fb);transition:background .2s;white-space:nowrap}
+    .waitlist-btn:hover{background:var(--orange2)}
+    .waitlist-success{display:none;color:#4ade80;font-size:.9rem;margin-top:.75rem;font-weight:600}
+
+    /* ── FOOTER ── */
+    .guide-footer{background:var(--brown3);padding:1.5rem 2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.3)}
+    .guide-footer a{color:rgba(255,255,255,.5)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:700px){
+      .dash-inner{grid-template-columns:1fr}
+      .dash-sidebar{display:none}
+      .dash-stats{grid-template-columns:1fr 1fr}
+      .topbar-links{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="/" class="topbar-brand" style="text-decoration:none">
+    <svg viewBox="0 0 40 40" fill="none" style="width:22px;height:22px">
+      <ellipse cx="20" cy="26" rx="12" ry="9" fill="#8B5E3C"/>
+      <ellipse cx="20" cy="15" rx="9" ry="7" fill="#8B5E3C"/>
+      <circle cx="17" cy="14" r="1.4" fill="#fff"/><circle cx="23" cy="14" r="1.4" fill="#fff"/>
+      <circle cx="17.5" cy="14" r=".8" fill="#2a1a08"/><circle cx="23.5" cy="14" r=".8" fill="#2a1a08"/>
+    </svg>
+    Nutter<span>Butters</span>
+  </a>
+  <div class="topbar-links">
+    <a href="/">← Back to site</a>
+    <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank">Fiverr</a>
+    <a href="#coming-soon">Coming Soon: Dashboard</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🤖 ProPHBot Setup Guide</div>
+  <h1>Set up your bot in<br/><em>under 30 minutes.</em></h1>
+  <p class="hero-sub">Follow these 5 steps. The bot ships as a <strong style="color:var(--yellow)">ready-to-run EXE</strong> — no Python, no terminal, no coding. Just double-click and go. Check off as you go — progress is saved automatically.</p>
+
+  <div class="hero-progress">
+    <div>
+      <div class="progress-num" id="progress-count">0/7</div>
+      <div class="progress-label">steps<br/>completed</div>
+    </div>
+    <div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+      </div>
+      <div style="font-size:.7rem;color:rgba(255,255,255,.35);margin-top:.3rem" id="progress-label">Not started yet</div>
+    </div>
+  </div>
+  <button class="hero-reset" onclick="resetProgress()">↺ Reset progress</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Intro box -->
+  <div class="intro-box">
+    <div class="intro-icon">📋</div>
+    <div>
+      <div class="intro-title">Before you start — what you need</div>
+      <p class="intro-text">Make sure you have all of these ready. The bot runs as a <strong>desktop EXE</strong> — no Python knowledge needed. You only need a browser and a Windows PC.</p>
+      <div class="intro-pills">
+        <span class="intro-pill">🖥️ Windows / Mac / Linux PC</span>
+        <span class="intro-pill">🟠 Shopee PH account</span>
+        <span class="intro-pill">🔵 Lazada PH account</span>
+        <span class="intro-pill">🟣 Zalora PH account (free)</span>
+        <span class="intro-pill" style="background:rgba(232,97,26,.1);border-color:rgba(232,97,26,.25);color:var(--orange2)">🖥️ gui.py — desktop dashboard</span>
+        <span class="intro-pill" style="background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.2);color:#991b1b">❌ TikTok Shop — not supported</span>
+        <span class="intro-pill">📱 5 Threads/Instagram accounts</span>
+        <span class="intro-pill">🌐 Chrome browser</span>
+        <span class="intro-pill">☁️ Meta developer account (free)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TikTok disclaimer -->
+  <div class="infobox danger" style="margin-bottom:1.5rem;border-radius:var(--r)">
+    <span class="infobox-icon">❌</span>
+    <div>
+      <strong>TikTok Shop cannot be scraped — here's why.</strong><br/>
+      TikTok fires a CAPTCHA challenge the instant any automated browser visits their shop. There is no reliable workaround. <strong>Any bot claiming to scrape TikTok Shop is either broken or lying.</strong><br/><br/>
+      <strong>What we use instead:</strong> Shopee Flash Sale — it scrapes real discounted products directly from Shopee's flash sale API. These are often better-converting than TikTok Shop products anyway because buyers already trust Shopee.
+    </div>
+  </div>
+
+  <!-- STEP 1: Download and run install.bat -->
+  <div class="step" id="step-1">
+    <div class="step-head" onclick="toggleStep(1)">
+      <div class="step-num">1</div>
+      <div class="step-meta">
+        <div class="step-title">Download &amp; run install.bat</div>
+        <div class="step-subtitle">One click — installs everything automatically</div>
+      </div>
+      <span class="step-badge badge-req">Required · ~3 min</span>
+      <span class="step-chevron">▾</span>
+    </div>
+    <div class="step-body">
+      <div class="step-content">
+        <div class="block">
+          <p class="text">Your Fiverr delivery includes a ZIP file. Inside it you'll find <strong>install.bat</strong> — double-clicking it handles all setup automatically.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Steps</div>
+          <ul class="steps-list">
+            <li><span class="num">1</span><span>Download the ZIP from your Fiverr order delivery</span></li>
+            <li><span class="num">2</span><span>Right-click the ZIP → <strong>Extract All</strong> → choose a location like <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">C:\ProPHBot\</code></span></li>
+            <li><span class="num">3</span><span>Open the extracted folder → <strong>double-click install.bat</strong></span></li>
+            <li><span class="num">4</span><span>A terminal window opens and installs everything. Wait for it to say <strong>"Setup complete!"</strong></span></li>
+            <li><span class="num">5</span><span>Press any key to close it</span></li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="block-label">What install.bat does</div>
+          <div class="terminal">
+            <div class="terminal-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-label">install.bat output</div></div>
+            <div class="terminal-body">
+              <div class="t-ok">[OK] Python 3.12.2 found</div>
+              <div class="t-ok">[OK] pip updated</div>
+              <div class="t-warn">[2/4] Installing bot packages...</div>
+              <div class="t-ok">[OK] All packages installed</div>
+              <div class="t-warn">[3/4] Installing Chromium browser... (~150MB)</div>
+              <div class="t-ok">[OK] Chromium installed</div>
+              <div class="t-ok">[4/4] All imports verified</div>
+              <div class="t-ok">Setup complete! You can now open ProPHBot.exe</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="infobox warn">
+          <span class="infobox-icon">⚠️</span>
+          <span>install.bat requires Python on your PC. If you don't have it yet, download it free at <a href="https://www.python.org/downloads/" target="_blank">python.org/downloads</a> — tick <strong>"Add Python to PATH"</strong> during install, then run install.bat again.</span>
+        </div>
+
+        <button class="trouble-toggle" onclick="toggleTrouble(this)">🔧 Having trouble?</button>
+        <div class="trouble-body">
+          <ul>
+            <li><strong>"Python is not recognized"</strong> — install Python from python.org, tick "Add to PATH", then re-run install.bat.</li>
+            <li><strong>Windows blocked the file</strong> — right-click install.bat → Properties → tick "Unblock" → OK, then run again.</li>
+            <li><strong>Chromium download is slow</strong> — it's 150MB, give it 5–10 minutes on a slow connection.</li>
+            <li><strong>Access denied</strong> — right-click install.bat → "Run as administrator".</li>
+          </ul>
+        </div>
+
+        <div class="mark-done-wrap">
+          <button class="mark-done-btn" onclick="markDone(1)">✓ Mark as done</button>
+          <span class="next-hint">Next: Export your session cookies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Open ProPHBot.exe -->
+  <div class="step" id="step-2">
+    <div class="step-head" onclick="toggleStep(2)">
+      <div class="step-num">2</div>
+      <div class="step-meta">
+        <div class="step-title">Open ProPHBot.exe</div>
+        <div class="step-subtitle">Launch the dashboard — your control centre</div>
+      </div>
+      <span class="step-badge badge-req">Required</span>
+      <span class="step-chevron">▾</span>
+    </div>
+    <div class="step-body">
+      <div class="step-content">
+        <div class="block">
+          <p class="text">Once install.bat finishes, double-click <strong>ProPHBot.exe</strong> to open the dashboard. This is the only file you'll use from now on.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-label">What's in your ProPHBot folder</div>
+          <div class="terminal">
+            <div class="terminal-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-label">C:\ProPHBot\</div></div>
+            <div class="terminal-body">
+              <div class="t-ok" style="color:#f5c842">ProPHBot.exe       <span class="t-comment" style="color:rgba(245,200,66,.6)"># ← double-click this every time ✨</span></div>
+              <div class="t-ok">install.bat        <span class="t-comment"># ← run once during setup only</span></div>
+              <div class="t-ok">proph_bot.py       <span class="t-comment"># ← engine (never edit)</span></div>
+              <div class="t-ok">platforms.json     <span class="t-comment"># ← scraper config</span></div>
+              <div class="t-ok">config.json        <span class="t-comment"># ← credentials (edit via dashboard)</span></div>
+              <div class="t-ok">.env.example       <span class="t-comment"># ← env var template</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="infobox success">
+          <span class="infobox-icon">✅</span>
+          <span>The dashboard has 6 tabs: <strong>Dashboard</strong> (run bot), <strong>Live Log</strong> (watch it work), <strong>Accounts</strong> (check status), <strong>Tokens</strong> (manage API tokens), <strong>Settings</strong> (paste your IDs), <strong>Platforms</strong> (see scraper config).</span>
+        </div>
+
+        <button class="trouble-toggle" onclick="toggleTrouble(this)">🔧 EXE won't open?</button>
+        <div class="trouble-body">
+          <ul>
+            <li><strong>Windows Defender blocked it</strong> — click "More info" → "Run anyway". The EXE is safe — Windows flags unsigned apps by default.</li>
+            <li><strong>"Missing DLL" error</strong> — install.bat didn't finish correctly. Run it again.</li>
+            <li><strong>Nothing happens on double-click</strong> — right-click → "Run as administrator".</li>
+          </ul>
+        </div>
+
+        <div class="mark-done-wrap">
+          <button class="mark-done-btn" onclick="markDone(2)">✓ Mark as done</button>
+          <span class="next-hint">Next: Export your session cookies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Export session cookies -->
+  <div class="step" id="step-3">
+    <div class="step-head" onclick="toggleStep(3)">
+      <div class="step-num">4</div>
+      <div class="step-meta">
+        <div class="step-title">Export session cookies</div>
+        <div class="step-subtitle">Shopee, Lazada, and Zalora — one by one</div>
+      </div>
+      <span class="step-badge badge-req">Required</span>
+      <span class="step-chevron">▾</span>
+    </div>
+    <div class="step-body">
+      <div class="step-content">
+        <div class="block">
+          <p class="text">The bot logs in as you by using your browser cookies. We export them with a free Chrome extension called <strong>Cookie-Editor</strong>. This is safe — cookies only work from your IP address.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Install Cookie-Editor (one time)</div>
+          <ul class="steps-list">
+            <li><span class="num">1</span><span>In Chrome, go to <a href="https://chrome.google.com/webstore/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm" target="_blank">Cookie-Editor by cgagnier</a> on the Chrome Web Store</span></li>
+            <li><span class="num">2</span><span>Click <strong>Add to Chrome</strong> → <strong>Add extension</strong></span></li>
+            <li><span class="num">3</span><span>Pin it to your toolbar for easy access (click the puzzle piece icon in Chrome → pin Cookie-Editor)</span></li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Export Shopee cookies</div>
+          <ul class="steps-list">
+            <li><span class="num">1</span><span>Open <a href="https://shopee.ph" target="_blank">shopee.ph</a> in Chrome and make sure you're <strong>logged in</strong></span></li>
+            <li><span class="num">2</span><span>Click the Cookie-Editor icon in your toolbar</span></li>
+            <li><span class="num">3</span><span>Click <strong>Export</strong> at the bottom → choose <strong>Export as JSON</strong></span></li>
+            <li><span class="num">4</span><span>Copy the JSON. Open your bot folder → <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">sessions/</code> folder → create a file named <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">shopee_session.json</code> → paste the JSON in</span></li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Repeat for Lazada and Zalora</div>
+          <p class="text">Do the same steps for <a href="https://www.lazada.com.ph" target="_blank">lazada.com.ph</a> → save as <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">lazada_session.json</code></p>
+          <p class="text">And for <a href="https://www.zalora.com.ph" target="_blank">zalora.com.ph</a> → save as <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">zalora_session.json</code> (create a free Zalora account if you don't have one)</p>
+        </div>
+
+        <div class="infobox warn">
+          <span class="infobox-icon">⚠️</span>
+          <span>Cookies expire after a few weeks. If the bot stops scraping a platform, just re-export and overwrite the file. Takes 2 minutes.</span>
+        </div>
+
+        <div class="mark-done-wrap">
+          <button class="mark-done-btn" onclick="markDone(3)">✓ Mark as done</button>
+          <span class="next-hint">Next: Get your Threads API tokens</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: Threads API tokens -->
+  <div class="step" id="step-4">
+    <div class="step-head" onclick="toggleStep(4)">
+      <div class="step-num">5</div>
+      <div class="step-meta">
+        <div class="step-title">Get Threads API tokens</div>
+        <div class="step-subtitle">One token per account — done once via Meta developer tools</div>
+      </div>
+      <span class="step-badge badge-req">Required</span>
+      <span class="step-chevron">▾</span>
+    </div>
+    <div class="step-body">
+      <div class="step-content">
+        <div class="block">
+          <p class="text">The bot posts to Threads using the official API. You need an access token for each of your 5 Threads accounts. This sounds complicated but takes about 10 minutes total.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Create a Meta App (one time)</div>
+          <ul class="steps-list">
+            <li><span class="num">1</span><span>Go to <a href="https://developers.facebook.com/apps" target="_blank">developers.facebook.com/apps</a> and log in</span></li>
+            <li><span class="num">2</span><span>Click <strong>Create App</strong> → select <strong>Other</strong> → <strong>Business</strong></span></li>
+            <li><span class="num">3</span><span>Name it anything (e.g. "MyBot"). Fill in your email. Click Create.</span></li>
+            <li><span class="num">4</span><span>In the app dashboard → Use Cases → find <strong>"Access the Threads API"</strong> → click it → add <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">threads_basic</code> and <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">threads_content_publish</code></span></li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Add each Threads account as a tester</div>
+          <ul class="steps-list">
+            <li><span class="num">1</span><span>In your app: <strong>App Roles → Roles → Add Testers</strong></span></li>
+            <li><span class="num">2</span><span>Add the Instagram usernames for all 5 accounts</span></li>
+            <li><span class="num">3</span><span>Each account needs to accept the invite: Instagram app → Settings → Security → Tester Invites → Accept</span></li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Generate a token for each account</div>
+          <ul class="steps-list">
+            <li><span class="num">1</span><span>Go to <a href="https://developers.facebook.com/tools/explorer" target="_blank">developers.facebook.com/tools/explorer</a></span></li>
+            <li><span class="num">2</span><span>Switch the API base URL to <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">graph.threads.net</code></span></li>
+            <li><span class="num">3</span><span>Select your app → click <strong>Generate Threads Access Token</strong> → log in as account1</span></li>
+            <li><span class="num">4</span><span>Copy the token. Paste into <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">config.json</code> under <code style="font-family:var(--fm);background:var(--cream3);padding:.1rem .3rem;border-radius:3px">publisher.threads_api.accounts[0].access_token</code></span></li>
+            <li><span class="num">5</span><span>Repeat in an <strong>incognito window</strong> for each remaining account</span></li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Exchange tokens for 60-day tokens (important!)</div>
+          <p class="text">The tokens from Graph API Explorer expire in 1 hour. Run this command to convert them to 60-day tokens:</p>
+          <div class="terminal copy-wrap">
+            <div class="terminal-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-label">Terminal</div></div>
+            <div class="terminal-body">
+              <div><span class="t-prompt">$</span><span class="t-cmd">python refresh_tokens.py --exchange</span></div>
+              <div class="t-comment"># It will ask for your App ID and App Secret</div>
+              <div class="t-comment"># Find them at: developers.facebook.com → Your App → App Settings → Basic</div>
+              <div class="t-ok">[account1] @yourhandle</div>
+              <div class="t-ok">    ✅ Long-lived token (60 days)</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this,'python refresh_tokens.py --exchange')">Copy</button>
+          </div>
+        </div>
+
+        <div class="mark-done-wrap">
+          <button class="mark-done-btn" onclick="markDone(4)">✓ Mark as done</button>
+          <span class="next-hint">Next: Configure your settings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6: Configure with GUI -->
+  <div class="step" id="step-5">
+    <div class="step-head" onclick="toggleStep(5)">
+      <div class="step-num">6</div>
+      <div class="step-meta">
+        <div class="step-title">Configure settings in the GUI</div>
+        <div class="step-subtitle">No text editing needed — use the Settings tab in the dashboard</div>
+      </div>
+      <span class="step-badge badge-todo">2 min</span>
+      <span class="step-chevron">▾</span>
+    </div>
+    <div class="step-body">
+      <div class="step-content">
+        <div class="block">
+          <p class="text">Open the GUI dashboard first:</p>
+          <div class="terminal copy-wrap">
+            <div class="terminal-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-label">Terminal</div></div>
+            <div class="terminal-body">
+              <div><span class="t-prompt">$</span><span class="t-cmd">ProPHBot.exe (already open)</span></div>
+              <div class="t-ok">✅ NutterButters — ProPHBot GUI opens</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this,'ProPHBot.exe (already open)')">Copy</button>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-label">In the GUI — click ⚙️ Settings in the sidebar</div>
+          <ul class="steps-list">
+            <li><span class="num">1</span><span>Open the <strong>Settings</strong> tab from the left sidebar</span></li>
+            <li><span class="num">2</span><span><strong>Affiliate IDs</strong> — paste your Shopee ID and/or Lazada ID (apply at affiliate.shopee.ph if you don't have one yet)</span></li>
+            <li><span class="num">3</span><span><strong>Involve Asia</strong> — if approved, toggle it on and paste your API key. Leave it off for now if not.</span></li>
+            <li><span class="num">4</span><span><strong>Telegram</strong> — paste your bot token and channel ID if you have a Telegram channel</span></li>
+            <li><span class="num">5</span><span><strong>Scheduler</strong> — set interval to <strong>12</strong> hours (default)</span></li>
+            <li><span class="num">6</span><span>Click <strong>💾 Save Settings</strong> — done! No text editor needed.</span></li>
+          </ul>
+        </div>
+
+        <div class="infobox success">
+          <span class="infobox-icon">✅</span>
+          <span>The GUI Settings tab writes directly to <code style="font-family:var(--fm)">config.json</code> for you. You never need to open a text editor to configure the bot.</span>
+        </div>
+
+        <div class="infobox info">
+          <span class="infobox-icon">💡</span>
+          <span>Want to check your accounts are set up correctly? Click <strong>📱 Accounts</strong> in the sidebar — it shows the status of each account's API token and session file with green/red indicators.</span>
+        </div>
+
+        <div class="mark-done-wrap">
+          <button class="mark-done-btn" onclick="markDone(5)">✓ Mark as done</button>
+          <span class="next-hint">Last step: Run your first test</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6: First run -->
+  <div class="step" id="step-6">
+    <div class="step-head" onclick="toggleStep(6)">
+      <div class="step-num">7</div>
+      <div class="step-meta">
+        <div class="step-title">Run your first test from the GUI</div>
+        <div class="step-subtitle">Dry run first — no terminal commands needed</div>
+      </div>
+      <span class="step-badge badge-req">Final step</span>
+      <span class="step-chevron">▾</span>
+    </div>
+    <div class="step-body">
+      <div class="step-content">
+
+        <div class="block">
+          <p class="text">If the dashboard isn't open yet, double-click <strong>ProPHBot.exe</strong> in your ProPHBot folder.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Step 1 — Click 🧪 Dry Run on the Dashboard</div>
+          <p class="text">The Dashboard tab has two run buttons at the top right. Click <strong>🧪 Dry Run</strong> first — this scrapes products and shows exactly what the bot would post, without actually posting anything.</p>
+          <div class="infobox info">
+            <span class="infobox-icon">👁️</span>
+            <span>The GUI automatically switches to the <strong>📋 Live Log</strong> tab so you can watch the bot work in real time — green lines = success, red lines = something needs fixing.</span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-label">What good output looks like</div>
+          <div class="terminal">
+            <div class="terminal-bar"><div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div><div class="t-label">Live Log panel</div></div>
+            <div class="terminal-body">
+              <div class="t-ok">[OK]   [Shopee] 16 products ✅</div>
+              <div class="t-ok">[OK]   [Lazada] 16 products ✅</div>
+              <div class="t-ok">[OK]   [Flash Sale] 38 products ✅</div>
+              <div class="t-warn">[INFO] 📨 5 niche post(s)...</div>
+              <div class="t-ok">[INFO] DRY RUN — [account1] 3 post(s) previewed</div>
+              <div class="t-ok">[INFO] DRY RUN — [account2] 3 post(s) previewed</div>
+              <div class="t-ok">Cycle done — 5 posted (dry run), 0 failed</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Step 2 — If it looks good, click ▶ Run Now</div>
+          <p class="text">Go back to <strong>📊 Dashboard</strong> and click <strong>▶ Run Now</strong>. This posts to all 5 accounts for real. Watch the Live Log for confirmation.</p>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Step 3 — Turn on the scheduler</div>
+          <p class="text">Once everything works, click the <strong>⏰ Schedule: OFF</strong> button on the Dashboard — it turns orange and becomes <strong>Schedule: ON</strong>. The bot now runs every 12 hours automatically while the GUI window is open.</p>
+          <div class="infobox warn">
+            <span class="infobox-icon">⚠️</span>
+            <span>The scheduler requires the GUI window to stay open. If you close it, scheduling stops. For 24/7 running without leaving the GUI open, you can still use the terminal: <code style="font-family:var(--fm)">Task Scheduler (search Windows for "Task Scheduler" to set it up)</code></span>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-label">Monitoring — check the 📊 Dashboard stats</div>
+          <p class="text">The Dashboard shows posts today, products found, active accounts, and cycles run — all updating in real time as the bot runs.</p>
+        </div>
+
+        <div class="infobox success">
+          <span class="infobox-icon">🎉</span>
+          <span><strong>You're all set!</strong> The bot is running and posting trending PH products every 12 hours. Apply for Shopee/Lazada affiliate programs and add your IDs in the GUI Settings tab to start earning commission.</span>
+        </div>
+
+        <button class="trouble-toggle" onclick="toggleTrouble(this)">🔧 Something went wrong?</button>
+        <div class="trouble-body">
+          <ul>
+            <li><strong>EXE won't open</strong> — run install.bat again, then try ProPHBot.exe.</li>
+            <li><strong>0 products scraped</strong> — session cookies expired. Go to 📱 Accounts tab — any red indicators? Re-export from Cookie-Editor and replace files in <code style="font-family:var(--fm)">sessions/</code>.</li>
+            <li><strong>Threads post failed — token expired</strong> — open terminal and run <code style="font-family:var(--fm)">python refresh_tokens.py</code>, then try again.</li>
+            <li><strong>ModuleNotFoundError</strong> — run <code style="font-family:var(--fm)">pip install playwright playwright-stealth schedule customtkinter Pillow</code>.</li>
+            <li><strong>Something else?</strong> — message on <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank">Fiverr</a> with a screenshot of the Live Log panel.</li>
+          </ul>
+        </div>
+
+        <div class="mark-done-wrap">
+          <button class="mark-done-btn" onclick="markDone(6)">🎉 Setup complete!</button>
+          <span class="next-hint">Welcome to the affiliate bot life 🤖</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── COMING SOON SECTION ─── -->
+  <div class="coming-section" id="coming-soon">
+    <div class="coming-header">
+      <div class="coming-eyebrow">🚧 Coming Soon</div>
+      <h2 class="coming-title">Dashboard included.<br/><em>A cloud portal is coming.</em></h2>
+      <p class="coming-sub">The desktop GUI is already included with your purchase. We're also building a cloud portal so you can manage your bot and see post stats from any browser — without needing the GUI open on your PC.</p>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="dash-mockup">
+      <div class="dash-topbar">
+        <div class="dash-dots"><div class="dash-dot"></div><div class="dash-dot"></div><div class="dash-dot"></div></div>
+        <div class="dash-url">app.nutterbutters.uk/dashboard</div>
+      </div>
+      <div class="dash-inner">
+        <div class="dash-sidebar">
+          <div class="dash-logo">Nutter<span>Butters</span></div>
+          <div class="dash-nav-item active"><span class="icon">📊</span> Dashboard</div>
+          <div class="dash-nav-item"><span class="icon">🤖</span> My Bot</div>
+          <div class="dash-nav-item"><span class="icon">📱</span> Accounts</div>
+          <div class="dash-nav-item"><span class="icon">📈</span> Post Stats</div>
+          <div class="dash-nav-item"><span class="icon">🔗</span> Affiliate Links</div>
+          <div class="dash-nav-item"><span class="icon">⚙️</span> Settings</div>
+          <div class="dash-nav-item" style="margin-top:auto"><span class="icon">💳</span> Subscription</div>
+        </div>
+        <div class="dash-main">
+          <div class="dash-welcome">Welcome back, <span>Moises</span> 👋</div>
+          <div class="dash-stats">
+            <div class="dash-stat">
+              <div class="dash-stat-num orange">247</div>
+              <div class="dash-stat-label">Posts this month</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-num green">5</div>
+              <div class="dash-stat-label">Active accounts</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-num yellow">38</div>
+              <div class="dash-stat-label">Products today</div>
+            </div>
+          </div>
+          <div class="dash-feed">
+            <div class="dash-feed-title">Recent Activity</div>
+            <div class="dash-feed-item">
+              <div class="dash-feed-dot ok"></div>
+              <div class="dash-feed-text">Posted 5 products to @kawaii.finds.ph</div>
+              <div class="dash-feed-time">2m ago</div>
+            </div>
+            <div class="dash-feed-item">
+              <div class="dash-feed-dot ok"></div>
+              <div class="dash-feed-text">Flash Sale scraped 38 products</div>
+              <div class="dash-feed-time">4m ago</div>
+            </div>
+            <div class="dash-feed-item">
+              <div class="dash-feed-dot run"></div>
+              <div class="dash-feed-text">Bot cycle started — 4 platforms</div>
+              <div class="dash-feed-time">6m ago</div>
+            </div>
+            <div class="dash-feed-item">
+              <div class="dash-feed-dot warn"></div>
+              <div class="dash-feed-text">Zalora session refreshed</div>
+              <div class="dash-feed-time">12h ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature tiers -->
+    <div class="features-grid">
+      <div class="feat-card tier-free">
+        <div class="feat-tier free">Free (Current)</div>
+        <div class="feat-title">Script Only</div>
+        <div class="feat-price">$0 <small>after purchase</small></div>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span> Bot files</li>
+          <li><span class="ck">✓</span> This setup guide</li>
+          <li><span class="ck">✓</span> README docs</li>
+          <li><span class="x">✗</span> Dashboard access</li>
+          <li><span class="x">✗</span> Post stats</li>
+          <li><span class="x">✗</span> Remote bot control</li>
+        </ul>
+      </div>
+      <div class="feat-card tier-basic">
+        <div class="feat-tier basic">Portal Basic — Coming Soon</div>
+        <div class="feat-title">Client Dashboard</div>
+        <div class="feat-price">~₱199 <small>/month</small></div>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span> Dashboard login</li>
+          <li><span class="ck">✓</span> Post history & stats</li>
+          <li><span class="ck">✓</span> Platform status</li>
+          <li><span class="ck">✓</span> Activity log viewer</li>
+          <li><span class="ck">✓</span> Session refresh alerts</li>
+          <li><span class="x">✗</span> Managed hosting</li>
+        </ul>
+      </div>
+      <div class="feat-card tier-pro">
+        <div class="feat-tier pro">Portal Pro — Coming Soon</div>
+        <div class="feat-title">Fully Managed</div>
+        <div class="feat-price">~₱499 <small>/month</small></div>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span> Everything in Basic</li>
+          <li><span class="ck">✓</span> Bot runs on our server 24/7</li>
+          <li><span class="ck">✓</span> No PC needed at all</li>
+          <li><span class="ck">✓</span> Auto token refresh</li>
+          <li><span class="ck">✓</span> Cookie session management</li>
+          <li><span class="ck">✓</span> Priority support</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Waitlist -->
+    <div class="waitlist-box">
+      <h3>Join the waitlist</h3>
+      <p>Be the first to know when the dashboard launches. No spam — one email when it's ready.</p>
+      <div class="waitlist-form">
+        <input class="waitlist-input" type="email" id="waitlist-email" placeholder="your@email.com"/>
+        <button class="waitlist-btn" onclick="joinWaitlist()">Notify Me</button>
+      </div>
+      <div class="waitlist-success" id="waitlist-success">✅ You're on the list! We'll email you when it launches.</div>
+    </div>
+
+  </div><!-- /coming-section -->
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="guide-footer">
+  <a href="/">nutterbutters.uk</a> · Setup Guide v2 · Made by <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank">Rey Moises</a> · Questions? <a href="https://www.fiverr.com/sellers/rey_moises" target="_blank">Message on Fiverr</a>
+</div>
+
+<script>
+  const TOTAL = 6;
+
+  function getProgress(){
+    try{ return JSON.parse(localStorage.getItem('prophbot_setup')||'{}'); }
+    catch(e){ return {}; }
+  }
+
+  function saveProgress(p){ localStorage.setItem('prophbot_setup', JSON.stringify(p)); }
+
+  function updateUI(){
+    const p    = getProgress();
+    const done = Object.values(p).filter(Boolean).length;
+    document.getElementById('progress-count').textContent = `${done}/${TOTAL}`;
+    document.getElementById('progress-bar').style.width   = `${(done/TOTAL)*100}%`;
+    const labels = ['Not started yet','Just getting started!','Making progress!',
+                    'Halfway there!','Almost done!','So close!','Setup complete! 🎉'];
+    document.getElementById('progress-label').textContent = labels[done];
+
+    for(let i=1;i<=TOTAL;i++){
+      const el = document.getElementById(`step-${i}`);
+      const btn = el.querySelector('.mark-done-btn');
+      const badge = el.querySelector('.step-badge');
+      if(p[i]){
+        el.classList.add('done');
+        el.classList.remove('active');
+        btn.textContent = '↺ Mark as incomplete';
+        btn.classList.add('undo');
+        badge.textContent = '✓ Done';
+        badge.className = 'step-badge badge-done';
+      } else {
+        el.classList.remove('done');
+        btn.classList.remove('undo');
+        if(i===1) btn.textContent = '✓ Mark as done';
+        else if(i===7) btn.textContent = '🎉 Setup complete!';
+        else btn.textContent = '✓ Mark as done';
+        // Mark current active step
+        const allDone = Array.from({length:i-1},(_,k)=>p[k+1]).every(Boolean);
+        if(allDone && !p[i]){
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      }
+    }
+  }
+
+  function markDone(n){
+    const p = getProgress();
+    p[n] = !p[n];
+    saveProgress(p);
+    updateUI();
+    // Auto-open next step
+    if(p[n] && n < TOTAL){
+      const next = document.getElementById(`step-${n+1}`);
+      next.classList.add('open');
+      setTimeout(()=>next.scrollIntoView({behavior:'smooth',block:'start'}),350);
+    }
+  }
+
+  function toggleStep(n){
+    const el = document.getElementById(`step-${n}`);
+    el.classList.toggle('open');
+  }
+
+  function toggleTrouble(btn){
+    const body = btn.nextElementSibling;
+    body.classList.toggle('open');
+    btn.textContent = body.classList.contains('open')
+      ? '🔧 Hide troubleshooting'
+      : '🔧 Having trouble?';
+  }
+
+  function resetProgress(){
+    if(confirm('Reset all progress?')){
+      localStorage.removeItem('prophbot_setup');
+      updateUI();
+    }
+  }
+
+  function copyCmd(btn, text){
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(()=>{ btn.textContent='Copy'; btn.classList.remove('copied'); },2000);
+    });
+  }
+
+  function joinWaitlist(){
+    const email = document.getElementById('waitlist-email').value;
+    if(!email || !email.includes('@')){ alert('Please enter a valid email address.'); return; }
+    document.getElementById('waitlist-success').style.display='block';
+    document.getElementById('waitlist-email').value='';
+    // In production, POST to your backend here
+  }
+
+  // Auto-open first incomplete step on load
+  window.addEventListener('load',()=>{
+    updateUI();
+    const p = getProgress();
+    for(let i=1;i<=TOTAL;i++){
+      if(!p[i]){
+        document.getElementById(`step-${i}`).classList.add('open');
+        break;
+      }
+    }
+  });
+</script>
+</body>
+</html>
