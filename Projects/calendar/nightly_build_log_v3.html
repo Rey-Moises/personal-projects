@@ -1,0 +1,857 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root{
+    --cream:#F3EFE4;
+    --cream-card:#FAF7EF;
+    --ink:#211F1A;
+    --ink-dim:#6B6558;
+    --sage:#7C8F6E;
+    --sage-deep:#5F7054;
+    --tan-rest:#C9BB94;
+    --border:#DAD3C0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:transparent;}
+  .tracker{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--cream);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:32px 28px 28px;
+    max-width:660px;
+    margin:0 auto;
+    color:var(--ink);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--sage-deep);
+    text-transform:uppercase;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:34px;
+    line-height:1.05;
+    margin:8px 0 10px;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--sage-deep);
+  }
+  .sub{
+    font-size:13px;
+    color:var(--ink-dim);
+    margin:0 0 18px;
+    line-height:1.55;
+    max-width:52ch;
+  }
+  .ticker-wrap{
+    overflow:hidden;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:7px 0;
+    margin-bottom:26px;
+  }
+  .ticker{
+    display:flex;
+    width:max-content;
+    animation:scrollTicker 32s linear infinite;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    color:var(--ink-dim);
+    white-space:nowrap;
+  }
+  .ticker span{padding-right:18px;}
+  @keyframes scrollTicker{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .ticker{animation:none;} }
+
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    margin:0 0 12px;
+  }
+  .section-label::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+
+  .goal-card{
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    border-left:3px solid var(--sage);
+    border-radius:12px;
+    padding:18px 18px 16px;
+    margin-bottom:16px;
+  }
+  .goal-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:8px;
+  }
+  .goal-name{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:18px;
+    line-height:1.25;
+  }
+  .goal-hours{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    font-weight:700;
+    color:var(--sage-deep);
+    background:#EDE7D4;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:4px 10px;
+    white-space:nowrap;
+  }
+  .goal-task{
+    font-size:13px;
+    color:var(--ink-dim);
+    line-height:1.5;
+    margin-bottom:12px;
+  }
+  .goal-progress-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+    margin-bottom:5px;
+  }
+  .goal-progress-bar{
+    height:6px;
+    background:var(--border);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .goal-progress-fill{
+    height:100%;
+    background:var(--sage);
+    border-radius:4px;
+    transition:width 0.25s ease;
+  }
+
+  .rest-banner{
+    display:none;
+    background:#EFE9D6;
+    border:1px solid var(--tan-rest);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:12.5px;
+    color:var(--ink);
+    margin-bottom:14px;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .rest-banner.show{display:flex;}
+  .rest-banner button{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    background:var(--tan-rest);
+    border:none;
+    border-radius:6px;
+    padding:6px 10px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .rest-banner .banner-actions{ display:flex; gap:8px; align-items:center; flex-shrink:0; }
+  .rest-banner .dismiss-link{
+    font-family:'Inter',sans-serif; font-size:11px; color:var(--ink-dim);
+    background:none; border:none; cursor:pointer; text-decoration:underline; padding:0;
+  }
+
+  .btn-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:30px;
+  }
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    font-weight:600;
+    border-radius:10px;
+    padding:13px;
+    cursor:pointer;
+    transition:opacity 0.15s ease, transform 0.1s ease;
+    border:1px solid transparent;
+  }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{ background:var(--sage); color:#FAFAF3; border-color:var(--sage);}
+  .btn-primary:hover{opacity:0.9;}
+  .btn-primary.active{ background:var(--sage-deep); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--border);}
+  .btn-ghost:hover{ border-color:var(--tan-rest); }
+  .btn-ghost.active{ background:var(--tan-rest); border-color:var(--tan-rest); }
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:30px;
+  }
+  .stat{
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 6px;
+    text-align:center;
+  }
+  .stat-value{
+    font-family:'JetBrains Mono',monospace;
+    font-size:21px;
+    font-weight:700;
+    color:var(--sage-deep);
+  }
+  .stat-label{
+    font-size:9.5px;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-top:4px;
+  }
+
+  .month-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:12px;
+  }
+  .nav-btn{
+    background:none;
+    border:1px solid var(--border);
+    color:var(--ink);
+    border-radius:6px;
+    width:26px;height:26px;
+    cursor:pointer;
+  }
+  .nav-btn:hover{border-color:var(--sage-deep);}
+  #monthLabel{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--ink-dim); }
+  .weekday-row{
+    display:grid; grid-template-columns:repeat(7,1fr);
+    text-align:center; font-size:10.5px; color:var(--ink-dim);
+    margin-bottom:6px; font-family:'JetBrains Mono',monospace;
+  }
+  .month-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-bottom:30px; }
+  .day-cell{
+    aspect-ratio:1; border-radius:7px;
+    background:#EDE8D9; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--ink-dim);
+    cursor:pointer; transition:background 0.12s ease;
+  }
+  .day-cell.blank{visibility:hidden; cursor:default;}
+  .day-cell.future,.day-cell.before-start{ background:#F0ECE0; color:#C7C0AC; cursor:not-allowed; }
+  .day-cell.done{ background:var(--sage); color:#F9F7EF; font-weight:700; }
+  .day-cell.rest{ background:var(--tan-rest); color:#4A4530; font-weight:600; }
+  .day-cell.today{ border-color:var(--ink); border-width:1.5px; }
+  .day-cell:not(.blank):not(.future):not(.before-start):hover{ background:#E2DCC7; }
+  .day-cell.done:hover{ opacity:0.88; }
+  .day-cell.rest:hover{ opacity:0.88; }
+
+  .heatmap-scroll{ overflow-x:auto; padding-bottom:6px; }
+  .heatmap-grid{
+    display:grid; grid-template-rows:repeat(7,10px);
+    grid-auto-flow:column; gap:3px; width:max-content;
+  }
+  .hm-cell{ width:10px; height:10px; border-radius:2px; background:#EDE8D9; }
+  .hm-cell.done{ background:var(--sage); }
+  .hm-cell.rest{ background:var(--tan-rest); }
+  .hm-cell.future{ background:transparent; }
+
+  .legend{ display:flex; gap:16px; margin-top:10px; font-size:10.5px; color:var(--ink-dim); }
+  .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .legend i{ width:9px; height:9px; border-radius:2px; display:inline-block; }
+  .legend .lg-done{ background:var(--sage); }
+  .legend .lg-rest{ background:var(--tan-rest); }
+
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:24px; padding-top:14px; border-top:1px solid var(--border);
+  }
+  .credit{ font-size:11px; color:var(--ink-dim); }
+  .reset-link{
+    font-family:'Inter',sans-serif; font-size:11px; color:var(--ink-dim);
+    background:none; border:none; cursor:pointer; text-decoration:underline; padding:0;
+  }
+  .reset-link:hover{ color:var(--sage-deep); }
+
+  /* ---- edit modal ---- */
+  .modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.35);
+    z-index:1000; align-items:center; justify-content:center;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal-card{
+    background:var(--cream-card); border:1px solid var(--border);
+    border-radius:14px; padding:24px 24px 20px; max-width:320px; width:90%;
+    box-shadow:0 8px 30px rgba(0,0,0,0.12);
+  }
+  .modal-title{
+    font-family:'Fraunces',serif; font-size:18px; font-weight:600;
+    margin:0 0 4px;
+  }
+  .modal-date{
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    color:var(--ink-dim); margin-bottom:18px;
+  }
+  .modal-options{display:flex; flex-direction:column; gap:8px;}
+  .modal-opt{
+    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600;
+    border-radius:8px; padding:11px; cursor:pointer; border:1px solid var(--border);
+    background:var(--cream); color:var(--ink); text-align:center; transition:all 0.1s;
+  }
+  .modal-opt:hover{border-color:var(--sage);}
+  .modal-opt.done-opt{ background:var(--sage); color:#FAFAF3; border-color:var(--sage); }
+  .modal-opt.done-opt:hover{opacity:0.9;}
+  .modal-opt.rest-opt{ background:var(--tan-rest); color:#4A4530; border-color:var(--tan-rest); }
+  .modal-opt.rest-opt:hover{opacity:0.9;}
+  .modal-opt.clear-opt{ color:var(--ink-dim); }
+  .modal-opt.clear-opt:hover{ border-color:#C0392B; color:#C0392B; }
+  .modal-close{
+    background:none; border:none; color:var(--ink-dim); cursor:pointer;
+    font-size:12px; text-decoration:underline; padding:8px 0 0; width:100%; text-align:center;
+  }
+  .modal-close:hover{color:var(--ink);}
+
+  .btn:focus-visible,.nav-btn:focus-visible,.day-cell:focus-visible{
+    outline:2px solid var(--sage-deep); outline-offset:2px;
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+  @media (max-width:420px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .btn-row{grid-template-columns:1fr;}
+    .tracker{padding:22px 18px 20px;}
+    h1{font-size:27px;}
+    .rest-banner{flex-direction:column; align-items:flex-start;}
+    .rest-banner .banner-actions{width:100%; justify-content:space-between;}
+  }
+
+  /* ---- curriculum reference ---- */
+  .curric-summary{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    font-weight:600;
+    color:var(--sage-deep);
+    cursor:pointer;
+    list-style:none;
+    padding:12px 14px;
+    background:var(--cream-card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .curric-summary::-webkit-details-marker{display:none;}
+  .curric-summary::after{content:'▾'; font-size:11px; transition:transform 0.15s ease;}
+  details[open] > .curric-summary::after{transform:rotate(180deg);}
+  .curric-summary:hover{border-color:var(--sage);}
+  .curric-cost{
+    background:var(--cream-card); border:1px solid var(--border); border-radius:10px;
+    padding:12px 14px; margin-bottom:14px; font-size:12px; color:var(--ink-dim); line-height:1.6;
+  }
+  .curric-cost strong{color:var(--ink);}
+  .curric-year{ margin-bottom:16px; }
+  .curric-year-title{
+    font-family:'Fraunces',serif; font-weight:600; font-size:15px;
+    color:var(--ink); margin:0 0 8px;
+  }
+  .curric-sem{
+    border-left:2px solid var(--border);
+    padding:2px 0 10px 12px;
+    margin-bottom:6px;
+    font-size:12px;
+    color:var(--ink-dim);
+    line-height:1.6;
+  }
+  .curric-sem-name{ font-weight:600; color:var(--ink); font-size:12.5px; }
+  .curric-sem b{ color:var(--ink); font-weight:600; }
+  .curric-gate{
+    display:inline-block; margin-top:2px;
+    font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    color:var(--sage-deep); background:#EDE7D4; border:1px solid var(--border);
+    border-radius:6px; padding:2px 7px;
+  }
+  .curric-checkpoint{
+    font-size:11.5px; color:var(--sage-deep); font-style:italic; margin-top:4px;
+  }
+  .curric-table{ width:100%; border-collapse:collapse; font-size:11.5px; margin:8px 0 14px; }
+  .curric-table th, .curric-table td{
+    border:1px solid var(--border); padding:6px 8px; text-align:left; color:var(--ink-dim);
+  }
+  .curric-table th{ color:var(--ink); font-family:'JetBrains Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; }
+  .curric-donot{ font-size:12px; color:var(--ink-dim); line-height:1.7; margin:0; padding-left:18px; }
+  .curric-directive{
+    font-size:12px; color:var(--ink); background:var(--cream-card); border-left:3px solid var(--sage);
+    border-radius:6px; padding:10px 12px; margin-top:4px;
+  }
+</style>
+
+<div class="tracker">
+  <div class="eyebrow">In Session — Cavite, PH — Est. <span id="startDateLabel"></span></div>
+  <h1>Tonight's <em>build.</em></h1>
+  <p class="sub">CS50 → Network+ → Security+ → Specialization → Capstone. Rest days protect your streak. Skipped nights don't — resume at 1x, don't double up.</p>
+
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker"></div>
+  </div>
+
+  <div class="section-label">01 / Tonight</div>
+  <div class="goal-card">
+    <div class="goal-top">
+      <div class="goal-name" id="goalName">Loading…</div>
+      <div class="goal-hours" id="goalHours">—</div>
+    </div>
+    <div class="goal-task" id="goalTask"></div>
+    <div class="goal-progress-label" id="goalProgressLabel"></div>
+    <div class="goal-progress-bar"><div class="goal-progress-fill" id="goalProgressFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="rest-banner" id="restBanner">
+    <span>Six straight nights. Fatigue compounds quietly — consider declaring tonight a rest day.</span>
+    <div class="banner-actions">
+      <button id="acceptRestSuggestion">rest tonight</button>
+      <button class="dismiss-link" id="dismissRestSuggestion">not tonight</button>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" id="markDoneBtn">$ mark --done</button>
+    <button class="btn btn-ghost" id="markRestBtn">$ mark --rest</button>
+  </div>
+
+  <div class="section-label">02 / Streak</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-value" id="streakVal">0</div><div class="stat-label">day streak</div></div>
+    <div class="stat"><div class="stat-value" id="longestVal">0</div><div class="stat-label">best streak</div></div>
+    <div class="stat"><div class="stat-value" id="totalVal">0</div><div class="stat-label">study nights</div></div>
+    <div class="stat"><div class="stat-value" id="dayVal">1</div><div class="stat-label">program day</div></div>
+  </div>
+
+  <div class="section-label">03 / This Month</div>
+  <div class="month-nav">
+    <button class="nav-btn" id="prevMonth" aria-label="Previous month">‹</button>
+    <div id="monthLabel">—</div>
+    <button class="nav-btn" id="nextMonth" aria-label="Next month">›</button>
+  </div>
+  <div class="weekday-row"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+  <div class="month-grid" id="monthGrid"></div>
+
+  <div class="section-label">04 / Full Log</div>
+  <div class="heatmap-scroll"><div class="heatmap-grid" id="heatmapGrid"></div></div>
+  <div class="legend"><span><i class="lg-done"></i>study night</span><span><i class="lg-rest"></i>rest day</span></div>
+
+  <div class="section-label">05 / Curriculum Reference</div>
+  <details class="curric-wrap">
+    <summary class="curric-summary"><span>View full 4-year curriculum (v2)</span></summary>
+
+    <div class="curric-cost">
+      <strong>Cost model:</strong> every course is free in audit mode — lectures, psets, and labs, no paywall on the content itself. The only mandatory spend in the whole plan is two CompTIA exam vouchers: <strong>Network+ (~$369)</strong> and <strong>Security+ (~$404)</strong>. Everything else — CS50, Coursera, edX verified certificates — skip and audit instead; GitHub proof matters more than a certificate PDF.
+    </div>
+
+    <div class="curric-year">
+      <div class="curric-year-title">Year 1 — Foundations</div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">1.1 CS50: Intro to Computer Science (Harvard)</div>
+        Audit free via edX. Algorithms, memory, abstraction at real depth.
+        <div><span class="curric-gate">Gate: pset8 + final project on GitHub</span></div>
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">1.2 CS50P: Intro to Programming with Python (Harvard)</div>
+        Free audit — finishes the "In Progress" line already on the resume.
+        <div><span class="curric-gate">Gate: all 9 psets passing</span></div>
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">1.3 Computer Networks (Stanford CS144 equiv.)</div>
+        Stanford CS144 archive + Georgia Tech CS 6250 backup. Kurose &amp; Ross as reference text.
+        <div><span class="curric-gate">Gate: diagram TCP handshake, DNS resolution, subnetting from memory</span></div>
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">1.4 CompTIA Network+ <b>(paid)</b></div>
+        Professor Messer free course + pfSense/VLAN home lab.
+        <div><span class="curric-gate">Gate: pass Network+ — $369 voucher</span></div>
+      </div>
+      <div class="curric-checkpoint">Checkpoint #1 — internship-eligible once Network+ is certified and CS50/CS50P are on GitHub.</div>
+    </div>
+
+    <div class="curric-year">
+      <div class="curric-year-title">Year 2 — Core Security</div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">2.1 Cryptography I (Stanford, Dan Boneh)</div>
+        Audit free on Coursera. Cipher-breaking exercises in Python, pushed to GitHub.
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">2.2 Computer Systems Security (MIT 6.858)</div>
+        MIT OpenCourseWare — fully free, no certificate to buy. OS/web security, buffer overflows, web exploitation labs.
+        <div><span class="curric-gate">Gate: labs 2 &amp; 3 documented on GitHub</span></div>
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">2.3 CompTIA Security+ <b>(paid)</b></div>
+        Professor Messer / Jason Dion free content.
+        <div><span class="curric-gate">Gate: pass Security+ SY0-701 — $404 voucher</span></div>
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">2.4 Web Security (Stanford CS253 equiv.)</div>
+        CS253 archive + official OWASP Top 10 docs. OverTheWire "Natas" wargame.
+        <div><span class="curric-gate">Gate: clear Natas levels 0–15</span></div>
+      </div>
+      <div class="curric-checkpoint">Checkpoint #2 — networking + security fundamentals + real labs on GitHub.</div>
+    </div>
+
+    <div class="curric-year">
+      <div class="curric-year-title">Year 3 — Applied Specialization</div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">3.1 Applied Offensive Security</div>
+        TryHackMe "Jr Penetration Tester" path + HackTheBox Academy free tiers.
+        <div><span class="curric-gate">Gate: 25+ machines rooted &amp; written up</span></div>
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">3.2 Applied Defensive Security (Blue Team)</div>
+        Wazuh or Security Onion, free docs/training. SIEM deployed in the home lab.
+        <div><span class="curric-gate">Gate: SIEM detecting simulated attacks</span></div>
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">3.3 Specialization Cert <b>(paid — pick one, only when job-targeted)</b></div>
+        CySA+ (best fit given the systems background), eJPT/CPTS ($100–500), or CEH v13 (~$1,199, only if a listing names it). Don't buy until a role calls for it.
+      </div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">3.4 Cloud Security Foundations</div>
+        AWS Skill Builder or Microsoft Learn AZ-500 path — free to learn; sit the paid exam only once employed in a cloud-touching role.
+      </div>
+      <div class="curric-checkpoint">Checkpoint #3 — junior SOC / security-analyst-ready portfolio.</div>
+    </div>
+
+    <div class="curric-year">
+      <div class="curric-year-title">Year 4 — Capstone</div>
+      <div class="curric-sem">
+        <div class="curric-sem-name">Cappyworks Security Audit &amp; Hardening Report</div>
+        Full pentest of your own ProPHBot/Gym Depot infrastructure, a written vulnerability assessment in industry format, remediation, and SIEM monitoring on production Cappyworks infra — network eng + security eng + real deployment in one project, and a sellable service line.
+      </div>
+    </div>
+
+    <table class="curric-table">
+      <tr><th>Phase</th><th>Duration</th><th>Daily load</th><th>Spend</th></tr>
+      <tr><td>Year 1 — Foundations</td><td>~6 mo</td><td>1–1.5 hr/day</td><td>$369</td></tr>
+      <tr><td>Year 2 — Core Security</td><td>~6 mo</td><td>1–1.5 hr/day</td><td>$404</td></tr>
+      <tr><td>Year 3 — Specialization</td><td>~6 mo</td><td>1–1.5 hr/day</td><td>$0–1,199 (only if required)</td></tr>
+      <tr><td>Year 4 — Capstone</td><td>~2–3 mo</td><td>1.5–2 hr/day</td><td>$0</td></tr>
+      <tr><td><b>Total</b></td><td><b>~20–22 mo</b></td><td>—</td><td><b>~$773 mandatory</b></td></tr>
+    </table>
+
+    <ul class="curric-donot">
+      <li>Don't buy CS50/Coursera/edX verified certificates — audit mode is identical content.</li>
+      <li>Don't buy CySA+/CEH/cloud certs before a job posting specifically names them.</li>
+      <li>Don't stack Network+ AND Security+ AND CC — Net+ → Sec+ is sufficient.</li>
+      <li>Don't let cert-hunting replace GitHub portfolio proof — recruiters check the repo, not the PDF.</li>
+    </ul>
+
+    <div class="curric-directive">
+      <b>One-line directive:</b> finish CS50P (already in progress), start CS50 in parallel, audit mode only. Everything else is sequenced and paid for exactly twice.
+    </div>
+  </details>
+
+  <div class="footer-row">
+    <span class="credit" id="statusLine">Engineered in Cavite. Zero-cost, all effort.</span>
+    <button class="reset-link" id="resetBtn">reset log</button>
+  </div>
+
+  <!-- edit modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-card">
+      <div class="modal-title">Edit date</div>
+      <div class="modal-date" id="editModalDate">—</div>
+      <div class="modal-options">
+        <button class="modal-opt done-opt" data-action="done">✔ Mark as done</button>
+        <button class="modal-opt rest-opt" data-action="rest">✦ Mark as rest</button>
+        <button class="modal-opt clear-opt" data-action="__clear__">— Clear entry</button>
+        <button class="modal-close" id="closeEditModal">cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'nightly-build-log:days';
+  const START_DATE = new Date(2026, 6, 15); // July 15, 2026
+
+  const MODULES = [
+    {name:"CS50P — Finish Remaining Psets", nights:10, hours:"~1 hr", task:"Close out remaining problem sets solo, no AI assist. Push to GitHub."},
+    {name:"CS50 — Intro to CS (Harvard)", nights:60, hours:"~1.5 hr", task:"Lecture segment + problem set. Audit mode — skip the paid certificate."},
+    {name:"CS144 — Computer Networks (Stanford)", nights:75, hours:"~1 hr", task:"Networking theory + Wireshark packet capture practice."},
+    {name:"Network+ Home Lab + Exam Prep", nights:28, hours:"~1 hr", task:"pfSense lab work + Professor Messer + practice questions."},
+    {name:"Cryptography I (Stanford / Boneh)", nights:45, hours:"~1 hr", task:"Crypto lecture + problem set. Implement a cipher exercise in Python."},
+    {name:"MIT 6.858 — Computer Systems Security", nights:75, hours:"~1.25 hr", task:"OS/web security lecture + MIT lab assignment."},
+    {name:"Security+ Exam Prep", nights:35, hours:"~1 hr", task:"Security+ domain review + practice exam questions."},
+    {name:"Web Security (CS253) + OWASP/Natas", nights:40, hours:"~1 hr", task:"Natas wargame level + OWASP Top 10 review."},
+    {name:"Offensive Security — TryHackMe / HTB", nights:75, hours:"~1.25 hr", task:"Root a box. Write it up, push to GitHub."},
+    {name:"Defensive Security — Wazuh SIEM Lab", nights:50, hours:"~1 hr", task:"Build/extend SIEM. Hunt anomalies in lab traffic."},
+    {name:"Specialization Cert Prep", nights:60, hours:"~1.25 hr", task:"CySA+ / eJPT / CEH study + hands-on labs."},
+    {name:"Cloud Security Foundations", nights:40, hours:"~1 hr", task:"AWS Skill Builder or AZ-500 free learning path module."},
+    {name:"Capstone — Cappyworks Security Audit", nights:45, hours:"~1.5–2 hr", task:"Pentest + written report + remediation + SIEM on prod infra."}
+  ];
+
+  let logData = {};
+  let viewYear, viewMonth;
+  let restSuggestionDismissed = false;
+  let editingDateStr = null;
+
+  function fmt(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function stripTime(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
+  function today(){ return stripTime(new Date()); }
+
+  async function loadData(){
+    try{
+      const res = await window.storage.get(STORAGE_KEY, false);
+      logData = res && res.value ? JSON.parse(res.value) : {};
+    }catch(e){ logData = {}; }
+  }
+  const DEFAULT_STATUS = 'Engineered in Cavite. Zero-cost, all effort.';
+  async function saveData(){
+    try{
+      await window.storage.set(STORAGE_KEY, JSON.stringify(logData), false);
+      const statusEl = document.getElementById('statusLine');
+      if (statusEl.textContent !== DEFAULT_STATUS) statusEl.textContent = DEFAULT_STATUS;
+    }
+    catch(e){ document.getElementById('statusLine').textContent = 'save failed — check connection'; }
+  }
+
+  function setDayState(dateStr, state){
+    const d = new Date(dateStr+'T00:00:00');
+    if (d > today() || d < START_DATE) return;
+    if (state === '__clear__' || logData[dateStr] === state) delete logData[dateStr];
+    else logData[dateStr] = state;
+    renderAll();
+    saveData();
+  }
+  function cycleDayClick(dateStr){
+    const d = new Date(dateStr+'T00:00:00');
+    if (d > today() || d < START_DATE) return;
+    // Show edit modal for past dates (not today) so user can choose explicitly
+    if (fmt(d) !== fmt(today())) {
+      openEditModal(dateStr);
+      return;
+    }
+    // Today: quick toggle
+    const cur = logData[dateStr];
+    if (!cur) logData[dateStr] = 'done';
+    else if (cur === 'done') logData[dateStr] = 'rest';
+    else delete logData[dateStr];
+    renderAll();
+    saveData();
+  }
+
+  function openEditModal(dateStr){
+    editingDateStr = dateStr;
+    const d = new Date(dateStr+'T00:00:00');
+    document.getElementById('editModalDate').textContent = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+    document.getElementById('editModal').classList.add('show');
+    // Highlight current status button
+    const cur = logData[dateStr];
+    document.querySelectorAll('.modal-opt[data-action]').forEach(btn => {
+      btn.style.opacity = btn.dataset.action === cur ? '0.5' : '1';
+    });
+  }
+
+  function closeEditModal(){
+    document.getElementById('editModal').classList.remove('show');
+    editingDateStr = null;
+  }
+
+  // Modal option click handler
+  document.querySelectorAll('.modal-opt[data-action]').forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      const action = btn.dataset.action;
+      if (!editingDateStr) return;
+      if (action === '__clear__' || logData[editingDateStr] === action) {
+        delete logData[editingDateStr];
+      } else {
+        logData[editingDateStr] = action;
+      }
+      closeEditModal();
+      renderAll();
+      saveData();
+    });
+  });
+  document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
+  // Close modal on overlay click
+  document.getElementById('editModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeEditModal();
+  });
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeEditModal();
+  });
+
+  function computeStreak(){
+    let streak = 0;
+    let d = new Date(today());
+    if (!logData[fmt(d)]) d.setDate(d.getDate()-1);
+    while (d >= START_DATE && logData[fmt(d)]){ streak++; d.setDate(d.getDate()-1); }
+    return streak;
+  }
+  function computePureStudyStreak(){
+    let streak = 0;
+    let d = new Date(today());
+    if (logData[fmt(d)] !== 'done') d.setDate(d.getDate()-1);
+    while (d >= START_DATE && logData[fmt(d)] === 'done'){ streak++; d.setDate(d.getDate()-1); }
+    return streak;
+  }
+  function computeLongest(){
+    const dates = Object.keys(logData).filter(k=>logData[k]).sort();
+    if (!dates.length) return 0;
+    let longest=1, cur=1;
+    for(let i=1;i<dates.length;i++){
+      const prev=new Date(dates[i-1]+'T00:00:00');
+      const curD=new Date(dates[i]+'T00:00:00');
+      const diff=Math.round((curD-prev)/86400000);
+      if (diff===1){ cur++; longest=Math.max(longest,cur); } else { cur=1; }
+    }
+    return longest;
+  }
+  function computeTotalNights(){ return Object.keys(logData).filter(k=>logData[k]==='done').length; }
+  function computeProgramDay(){ return Math.max(1, computeTotalNights() + Object.keys(logData).filter(k=>logData[k]==='rest').length); }
+
+  function getCurrentModuleInfo(){
+    const totalNights = computeTotalNights();
+    // The next night to study = totalNights + 1 (0-indexed → 1-indexed)
+    const nextNight = totalNights + 1;
+    let cum=0;
+    for (const m of MODULES){
+      if (nextNight <= cum+m.nights){
+        return { module:m, nightInModule: nextNight - cum, totalInModule:m.nights, complete:false };
+      }
+      cum += m.nights;
+    }
+    return { module:{name:"Program Complete — Advanced Practice", hours:"~1–2 hr", task:"Continue specialization depth, applications, and portfolio polish."}, nightInModule:1, totalInModule:1, complete:true };
+  }
+
+  function renderGoal(){
+    const info = getCurrentModuleInfo();
+    document.getElementById('goalName').textContent = info.module.name;
+    document.getElementById('goalHours').textContent = info.module.hours;
+    document.getElementById('goalTask').textContent = info.module.task;
+    document.getElementById('goalProgressLabel').textContent = info.complete ? 'Core curriculum complete' : `Night ${info.nightInModule} of ${info.totalInModule} in this module`;
+    const pct = Math.min(100, (info.nightInModule/info.totalInModule)*100);
+    document.getElementById('goalProgressFill').style.width = pct+'%';
+  }
+
+  function renderMonth(){
+    const grid = document.getElementById('monthGrid');
+    grid.innerHTML='';
+    const label = new Date(viewYear, viewMonth, 1).toLocaleString('en-US',{month:'long',year:'numeric'});
+    document.getElementById('monthLabel').textContent = label;
+    const firstDay = new Date(viewYear, viewMonth, 1);
+    const startOffset = firstDay.getDay();
+    const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+    const tdy = today();
+    for (let i=0;i<startOffset;i++){
+      const blank = document.createElement('div'); blank.className='day-cell blank'; grid.appendChild(blank);
+    }
+    for (let day=1; day<=daysInMonth; day++){
+      const d = new Date(viewYear, viewMonth, day);
+      const dateStr = fmt(d);
+      const cell = document.createElement('div');
+      cell.className='day-cell'; cell.textContent=day; cell.tabIndex=0;
+      if (d > tdy) cell.classList.add('future');
+      else if (d < START_DATE) cell.classList.add('before-start');
+      if (fmt(d)===fmt(tdy)) cell.classList.add('today');
+      if (logData[dateStr]==='done') cell.classList.add('done');
+      if (logData[dateStr]==='rest') cell.classList.add('rest');
+      cell.addEventListener('click', ()=>cycleDayClick(dateStr));
+      cell.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); cycleDayClick(dateStr);} });
+      grid.appendChild(cell);
+    }
+  }
+
+  function renderHeatmap(){
+    const grid = document.getElementById('heatmapGrid');
+    grid.innerHTML='';
+    const tdy = today();
+    const firstSunday = new Date(START_DATE);
+    firstSunday.setDate(firstSunday.getDate()-firstSunday.getDay());
+    const weeks=[]; let cur=new Date(firstSunday);
+    while (cur <= tdy){
+      const week=[];
+      for(let i=0;i<7;i++){ week.push(new Date(cur)); cur.setDate(cur.getDate()+1); }
+      weeks.push(week);
+    }
+    weeks.forEach(week=>{
+      week.forEach(d=>{
+        const cell=document.createElement('div');
+        const dateStr=fmt(d);
+        if (d>tdy || d<START_DATE) cell.className='hm-cell future';
+        else if (logData[dateStr]==='done') cell.className='hm-cell done';
+        else if (logData[dateStr]==='rest') cell.className='hm-cell rest';
+        else cell.className='hm-cell';
+        cell.title=dateStr;
+        grid.appendChild(cell);
+      });
+    });
+    const scrollBox=document.querySelector('.heatmap-scroll');
+    scrollBox.scrollLeft = scrollBox.scrollWidth;
+  }
+
+  function renderStats(){
+    document.getElementById('streakVal').textContent = computeStreak();
+    document.getElementById('longestVal').textContent = computeLongest();
+    document.getElementById('totalVal').textContent = computeTotalNights();
+    document.getElementById('dayVal').textContent = computeProgramDay();
+
+    const todayStr = fmt(today());
+    const state = logData[todayStr];
+    const doneBtn = document.getElementById('markDoneBtn');
+    const restBtn = document.getElementById('markRestBtn');
+    doneBtn.classList.toggle('active', state==='done');
+    restBtn.classList.toggle('active', state==='rest');
+    doneBtn.textContent = state==='done' ? '✓ done tonight' : '$ mark --done';
+    restBtn.textContent = state==='rest' ? '✓ resting tonight' : '$ mark --rest';
+
+    const banner = document.getElementById('restBanner');
+    banner.classList.toggle('show', !state && !restSuggestionDismissed && computePureStudyStreak()>=6);
+  }
+
+  function renderAll(){ renderGoal(); renderMonth(); renderHeatmap(); renderStats(); }
+
+  document.getElementById('prevMonth').addEventListener('click', ()=>{ viewMonth--; if(viewMonth<0){viewMonth=11; viewYear--;} renderMonth(); });
+  document.getElementById('nextMonth').addEventListener('click', ()=>{ viewMonth++; if(viewMonth>11){viewMonth=0; viewYear++;} renderMonth(); });
+  document.getElementById('markDoneBtn').addEventListener('click', ()=>{ const t=fmt(today()); setDayState(t, logData[t]==='done' ? '__clear__' : 'done'); });
+  document.getElementById('markRestBtn').addEventListener('click', ()=>{ const t=fmt(today()); setDayState(t, logData[t]==='rest' ? '__clear__' : 'rest'); });
+  document.getElementById('acceptRestSuggestion').addEventListener('click', ()=>{ const t=fmt(today()); logData[t]='rest'; renderAll(); saveData(); });
+  document.getElementById('dismissRestSuggestion').addEventListener('click', ()=>{ restSuggestionDismissed = true; renderStats(); });
+  document.getElementById('resetBtn').addEventListener('click', async ()=>{
+    if (!confirm('Clear all logged nights? This cannot be undone.')) return;
+    logData = {}; renderAll(); await saveData();
+  });
+
+  document.getElementById('startDateLabel').textContent = START_DATE.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  const tickerWords = ['NETWORK+','SECURITY+','CS50','CS144','MIT 6.858','CRYPTO I','WAZUH SIEM','CLOUD SEC','CAPSTONE','CAPPYWORKS'];
+  const tickerHTML = (tickerWords.concat(tickerWords)).map(w=>`<span>${w} —</span>`).join('');
+  document.getElementById('ticker').innerHTML = tickerHTML;
+
+  (async function init(){
+    const t = today();
+    viewYear = t.getFullYear(); viewMonth = t.getMonth();
+    await loadData();
+    renderAll();
+  })();
+})();
+</script>
