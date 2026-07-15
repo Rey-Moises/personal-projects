@@ -12,7 +12,16 @@
     --border:#DAD3C0;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:transparent;}
+  body{margin:0;background:var(--cream);min-height:100vh;}
+  .page-wrap{ padding:20px 16px 48px; }
+  .top-nav{ display:flex; justify-content:space-between; align-items:center; max-width:660px; margin:0 auto 14px; padding:0 4px; }
+  .top-nav .brand{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.1em; color:var(--ink-dim); text-transform:uppercase; }
+  .top-nav .links a{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.05em;
+    color:var(--ink-dim); text-decoration:none; margin-left:18px; text-transform:uppercase;
+    border-bottom:1px solid transparent; padding-bottom:2px;
+  }
+  .top-nav .links a:hover, .top-nav .links a.active{ color:var(--ink); border-color:var(--sage); }
   .tracker{
     font-family:'Inter',system-ui,sans-serif;
     background:var(--cream);
@@ -22,6 +31,11 @@
     max-width:660px;
     margin:0 auto;
     color:var(--ink);
+  }
+  @media (min-width:900px){
+    .top-nav{ max-width:720px; }
+    .tracker{ max-width:720px; padding:40px 44px 36px; }
+    h1{ font-size:38px; }
   }
   .eyebrow{
     font-family:'JetBrains Mono',monospace;
@@ -403,8 +417,42 @@
     font-size:12px; color:var(--ink); background:var(--cream-card); border-left:3px solid var(--sage);
     border-radius:6px; padding:10px 12px; margin-top:4px;
   }
+
+  /* ---- full roadmap ---- */
+  .roadmap-item{
+    display:flex; align-items:flex-start; gap:12px;
+    padding:10px 4px; border-bottom:1px solid var(--border);
+  }
+  .roadmap-item:last-child{ border-bottom:none; }
+  .roadmap-marker{
+    flex-shrink:0; width:24px; height:24px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+    background:var(--border); color:var(--ink-dim); margin-top:1px;
+  }
+  .roadmap-item.done .roadmap-marker{ background:var(--sage); color:#F9F7EF; }
+  .roadmap-item.current .roadmap-marker{ background:var(--ink); color:var(--cream); }
+  .roadmap-body{ flex:1; }
+  .roadmap-name{ font-size:13px; font-weight:600; color:var(--ink); line-height:1.4; }
+  .roadmap-item.upcoming .roadmap-name{ color:var(--ink-dim); font-weight:500; }
+  .roadmap-meta{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--ink-dim); margin-top:2px; }
+  .roadmap-item.current{ background:var(--cream-card); border-radius:8px; margin:2px 0; padding:10px 8px; }
+  .roadmap-item.current .roadmap-name::after{ content:'  ← you are here'; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--sage-deep); font-weight:600; }
+  .roadmap-divider{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--sage-deep); margin:16px 0 4px; padding-top:12px; border-top:1px dashed var(--border);
+  }
+  .roadmap-item.milestone .roadmap-marker{ background:transparent; border:1.5px solid var(--tan-rest); color:var(--tan-rest); }
 </style>
 
+<div class="page-wrap">
+<div class="top-nav">
+  <div class="brand">Cappyworks // NetSec</div>
+  <div class="links">
+    <a href="index.html" class="active">Tracker</a>
+    <a href="curriculum.html">Curriculum</a>
+  </div>
+</div>
 <div class="tracker">
   <div class="eyebrow">In Session — Cavite, PH — Est. <span id="startDateLabel"></span></div>
   <h1>Tonight's <em>build.</em></h1>
@@ -471,8 +519,8 @@
       <div class="curric-year-title">Year 1 — Foundations</div>
       <div class="curric-sem">
         <div class="curric-sem-name">1.1 CS50: Intro to Computer Science (Harvard)</div>
-        Audit free via edX. Algorithms, memory, abstraction at real depth.
-        <div><span class="curric-gate">Gate: pset8 + final project on GitHub</span></div>
+        Audit free via edX. Algorithms, memory, abstraction at real depth. Scoped through pset6 — Python/SQL/Flask covered separately via CS50P and the web security module.
+        <div><span class="curric-gate">Gate: pset6 on GitHub</span></div>
       </div>
       <div class="curric-sem">
         <div class="curric-sem-name">1.2 CS50P: Intro to Programming with Python (Harvard)</div>
@@ -568,6 +616,13 @@
     </div>
   </details>
 
+  <div class="section-label">06 / Full Roadmap — To Endgame</div>
+  <div class="goal-card" style="border-left-color:var(--ink);">
+    <div id="roadmapList"></div>
+    <div class="roadmap-divider">Endgame — After The Curriculum</div>
+    <div id="endgameList"></div>
+  </div>
+
   <div class="footer-row">
     <span class="credit" id="statusLine">Engineered in Cavite. Zero-cost, all effort.</span>
     <button class="reset-link" id="resetBtn">reset log</button>
@@ -587,6 +642,7 @@
     </div>
   </div>
 </div>
+</div>
 
 <script>
 (function(){
@@ -595,7 +651,7 @@
 
   const MODULES = [
     {name:"CS50P — Finish Remaining Psets", nights:10, hours:"~1 hr", task:"Close out remaining problem sets solo, no AI assist. Push to GitHub."},
-    {name:"CS50 — Intro to CS (Harvard)", nights:60, hours:"~1.5 hr", task:"Lecture segment + problem set. Audit mode — skip the paid certificate."},
+    {name:"CS50 — Intro to CS (Harvard)", nights:40, hours:"~1.5 hr", task:"Lecture segment + problem set, through pset6. Audit mode — skip the paid certificate."},
     {name:"CS144 — Computer Networks (Stanford)", nights:75, hours:"~1 hr", task:"Networking theory + Wireshark packet capture practice."},
     {name:"Network+ Home Lab + Exam Prep", nights:28, hours:"~1 hr", task:"pfSense lab work + Professor Messer + practice questions."},
     {name:"Cryptography I (Stanford / Boneh)", nights:45, hours:"~1 hr", task:"Crypto lecture + problem set. Implement a cipher exercise in Python."},
@@ -609,6 +665,15 @@
     {name:"Capstone — Cappyworks Security Audit", nights:45, hours:"~1.5–2 hr", task:"Pentest + written report + remediation + SIEM on prod infra."}
   ];
 
+  const ENDGAME_MILESTONES = [
+    {name:"Portfolio & Resume Finalization", task:"Polish every GitHub writeup. Update the resume with every shipped module and Cappyworks project."},
+    {name:"Apply — Remote Junior SOC / Security Roles", task:"Cast wide. Prioritize employers open to long-term remote or relocation-friendly hires."},
+    {name:"Land First Security Role", task:"1–2 years building real production experience, ideally cloud-touching."},
+    {name:"Specialize On The Job (Cloud / Blue Team)", task:"Convert AWS/AZ-500 foundations into applied, resume-grade production experience."},
+    {name:"File Migration — Canada Express Entry or NL Highly Skilled Migrant", task:"Use foreign employment + certs to file the permanent residency track."},
+    {name:"Relocate", task:"The endgame."}
+  ];
+
   let logData = {};
   let viewYear, viewMonth;
   let restSuggestionDismissed = false;
@@ -620,18 +685,18 @@
 
   async function loadData(){
     try{
-      const res = await window.storage.get(STORAGE_KEY, false);
-      logData = res && res.value ? JSON.parse(res.value) : {};
+      const raw = localStorage.getItem(STORAGE_KEY);
+      logData = raw ? JSON.parse(raw) : {};
     }catch(e){ logData = {}; }
   }
   const DEFAULT_STATUS = 'Engineered in Cavite. Zero-cost, all effort.';
   async function saveData(){
     try{
-      await window.storage.set(STORAGE_KEY, JSON.stringify(logData), false);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(logData));
       const statusEl = document.getElementById('statusLine');
       if (statusEl.textContent !== DEFAULT_STATUS) statusEl.textContent = DEFAULT_STATUS;
     }
-    catch(e){ document.getElementById('statusLine').textContent = 'save failed — check connection'; }
+    catch(e){ document.getElementById('statusLine').textContent = 'save failed — check browser storage'; }
   }
 
   function setDayState(dateStr, state){
@@ -829,7 +894,41 @@
     banner.classList.toggle('show', !state && !restSuggestionDismissed && computePureStudyStreak()>=6);
   }
 
-  function renderAll(){ renderGoal(); renderMonth(); renderHeatmap(); renderStats(); }
+  function renderRoadmap(){
+    const totalNights = computeTotalNights();
+    let cum = 0;
+    const list = document.getElementById('roadmapList');
+    list.innerHTML = '';
+    MODULES.forEach((m)=>{
+      const start = cum, end = cum + m.nights;
+      let status = 'upcoming';
+      if (totalNights >= end) status = 'done';
+      else if (totalNights >= start) status = 'current';
+      cum = end;
+      const item = document.createElement('div');
+      item.className = 'roadmap-item ' + status;
+      item.innerHTML = `<div class="roadmap-marker">${status==='done' ? '✓' : (MODULES.indexOf(m)+1)}</div>
+        <div class="roadmap-body">
+          <div class="roadmap-name">${m.name}</div>
+          <div class="roadmap-meta">${m.nights} nights · ${m.hours}/night</div>
+        </div>`;
+      list.appendChild(item);
+    });
+    const endList = document.getElementById('endgameList');
+    endList.innerHTML = '';
+    ENDGAME_MILESTONES.forEach((e)=>{
+      const item = document.createElement('div');
+      item.className = 'roadmap-item milestone upcoming';
+      item.innerHTML = `<div class="roadmap-marker">◆</div>
+        <div class="roadmap-body">
+          <div class="roadmap-name">${e.name}</div>
+          <div class="roadmap-meta">${e.task}</div>
+        </div>`;
+      endList.appendChild(item);
+    });
+  }
+
+  function renderAll(){ renderGoal(); renderMonth(); renderHeatmap(); renderStats(); renderRoadmap(); }
 
   document.getElementById('prevMonth').addEventListener('click', ()=>{ viewMonth--; if(viewMonth<0){viewMonth=11; viewYear--;} renderMonth(); });
   document.getElementById('nextMonth').addEventListener('click', ()=>{ viewMonth++; if(viewMonth>11){viewMonth=0; viewYear++;} renderMonth(); });
