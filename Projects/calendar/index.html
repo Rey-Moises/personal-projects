@@ -160,6 +160,36 @@
     transition:width 0.25s ease;
   }
 
+  .upnext-wrap{ margin-bottom:16px; }
+  .upnext-label{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-dim); margin-bottom:6px;
+  }
+  .upnext-item{
+    font-size:12.5px; color:var(--ink-dim); display:flex; align-items:center; gap:8px;
+    padding:4px 0;
+  }
+  .upnext-dot{
+    width:5px; height:5px; border-radius:50%; background:var(--tan-rest); flex-shrink:0;
+  }
+  .upnext-hours{ font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--sage-deep); margin-left:auto; }
+
+  /* ---- scroll reveal ---- */
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity 0.6s cubic-bezier(.2,.7,.3,1), transform 0.6s cubic-bezier(.2,.7,.3,1); }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  /* ---- magnetic buttons ---- */
+  .btn-primary, .btn-ghost{ will-change:transform; }
+
+  .stat, .day-cell:not(.blank), .roadmap-item, .goal-card{
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .stat:hover{ transform:translateY(-2px); box-shadow:0 4px 14px rgba(33,31,26,0.06); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
   .rest-banner{
     display:none;
     background:#EFE9D6;
@@ -463,7 +493,7 @@
   </div>
 
   <div class="section-label">01 / Tonight</div>
-  <div class="goal-card">
+  <div class="goal-card reveal">
     <div class="goal-top">
       <div class="goal-name" id="goalName">Loading…</div>
       <div class="goal-hours" id="goalHours">—</div>
@@ -471,6 +501,11 @@
     <div class="goal-task" id="goalTask"></div>
     <div class="goal-progress-label" id="goalProgressLabel"></div>
     <div class="goal-progress-bar"><div class="goal-progress-fill" id="goalProgressFill" style="width:0%"></div></div>
+  </div>
+
+  <div class="upnext-wrap reveal">
+    <div class="upnext-label">Up Next</div>
+    <div id="upNextList"></div>
   </div>
 
   <div class="rest-banner" id="restBanner">
@@ -487,7 +522,7 @@
   </div>
 
   <div class="section-label">02 / Streak</div>
-  <div class="stats">
+  <div class="stats reveal">
     <div class="stat"><div class="stat-value" id="streakVal">0</div><div class="stat-label">day streak</div></div>
     <div class="stat"><div class="stat-value" id="longestVal">0</div><div class="stat-label">best streak</div></div>
     <div class="stat"><div class="stat-value" id="totalVal">0</div><div class="stat-label">study nights</div></div>
@@ -495,17 +530,21 @@
   </div>
 
   <div class="section-label">03 / This Month</div>
-  <div class="month-nav">
-    <button class="nav-btn" id="prevMonth" aria-label="Previous month">‹</button>
-    <div id="monthLabel">—</div>
-    <button class="nav-btn" id="nextMonth" aria-label="Next month">›</button>
+  <div class="reveal">
+    <div class="month-nav">
+      <button class="nav-btn" id="prevMonth" aria-label="Previous month">‹</button>
+      <div id="monthLabel">—</div>
+      <button class="nav-btn" id="nextMonth" aria-label="Next month">›</button>
+    </div>
+    <div class="weekday-row"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+    <div class="month-grid" id="monthGrid"></div>
   </div>
-  <div class="weekday-row"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
-  <div class="month-grid" id="monthGrid"></div>
 
   <div class="section-label">04 / Full Log</div>
-  <div class="heatmap-scroll"><div class="heatmap-grid" id="heatmapGrid"></div></div>
-  <div class="legend"><span><i class="lg-done"></i>study night</span><span><i class="lg-rest"></i>rest day</span></div>
+  <div class="reveal">
+    <div class="heatmap-scroll"><div class="heatmap-grid" id="heatmapGrid"></div></div>
+    <div class="legend"><span><i class="lg-done"></i>study night</span><span><i class="lg-rest"></i>rest day</span></div>
+  </div>
 
   <div class="section-label">05 / Curriculum Reference</div>
   <details class="curric-wrap">
@@ -617,7 +656,7 @@
   </details>
 
   <div class="section-label">06 / Full Roadmap — To Endgame</div>
-  <div class="goal-card" style="border-left-color:var(--ink);">
+  <div class="goal-card reveal" style="border-left-color:var(--ink);">
     <div id="roadmapList"></div>
     <div class="roadmap-divider">Endgame — After The Curriculum</div>
     <div id="endgameList"></div>
@@ -800,13 +839,29 @@
     // The next night to study = totalNights + 1 (0-indexed → 1-indexed)
     const nextNight = totalNights + 1;
     let cum=0;
-    for (const m of MODULES){
+    for (let i=0;i<MODULES.length;i++){
+      const m = MODULES[i];
       if (nextNight <= cum+m.nights){
-        return { module:m, nightInModule: nextNight - cum, totalInModule:m.nights, complete:false };
+        return { module:m, index:i, nightInModule: nextNight - cum, totalInModule:m.nights, complete:false };
       }
       cum += m.nights;
     }
-    return { module:{name:"Program Complete — Advanced Practice", hours:"~1–2 hr", task:"Continue specialization depth, applications, and portfolio polish."}, nightInModule:1, totalInModule:1, complete:true };
+    return { module:{name:"Program Complete — Advanced Practice", hours:"~1–2 hr", task:"Continue specialization depth, applications, and portfolio polish."}, index:MODULES.length-1, nightInModule:1, totalInModule:1, complete:true };
+  }
+
+  function renderUpNext(){
+    const info = getCurrentModuleInfo();
+    const combined = MODULES.map(m=>({name:m.name, hours:m.hours}))
+      .concat(ENDGAME_MILESTONES.map(e=>({name:e.name, hours:null})));
+    const upcoming = combined.slice(info.index+1, info.index+3);
+    const container = document.getElementById('upNextList');
+    if (!upcoming.length){
+      container.innerHTML = `<div class="upnext-item"><span class="upnext-dot"></span>Endgame reached — migration phase</div>`;
+      return;
+    }
+    container.innerHTML = upcoming.map(u=>
+      `<div class="upnext-item"><span class="upnext-dot"></span>${u.name}${u.hours?` <span class="upnext-hours">${u.hours}</span>`:''}</div>`
+    ).join('');
   }
 
   function renderGoal(){
@@ -876,10 +931,10 @@
   }
 
   function renderStats(){
-    document.getElementById('streakVal').textContent = computeStreak();
-    document.getElementById('longestVal').textContent = computeLongest();
-    document.getElementById('totalVal').textContent = computeTotalNights();
-    document.getElementById('dayVal').textContent = computeProgramDay();
+    animateCount('streakVal', computeStreak());
+    animateCount('longestVal', computeLongest());
+    animateCount('totalVal', computeTotalNights());
+    animateCount('dayVal', computeProgramDay());
 
     const todayStr = fmt(today());
     const state = logData[todayStr];
@@ -928,7 +983,7 @@
     });
   }
 
-  function renderAll(){ renderGoal(); renderMonth(); renderHeatmap(); renderStats(); renderRoadmap(); }
+  function renderAll(){ renderGoal(); renderUpNext(); renderMonth(); renderHeatmap(); renderStats(); renderRoadmap(); }
 
   document.getElementById('prevMonth').addEventListener('click', ()=>{ viewMonth--; if(viewMonth<0){viewMonth=11; viewYear--;} renderMonth(); });
   document.getElementById('nextMonth').addEventListener('click', ()=>{ viewMonth++; if(viewMonth>11){viewMonth=0; viewYear++;} renderMonth(); });
@@ -946,11 +1001,67 @@
   const tickerHTML = (tickerWords.concat(tickerWords)).map(w=>`<span>${w} —</span>`).join('');
   document.getElementById('ticker').innerHTML = tickerHTML;
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- scroll reveal ----
+  function initRevealObserver(){
+    const targets = document.querySelectorAll('.reveal');
+    if (prefersReducedMotion || !('IntersectionObserver' in window)){
+      targets.forEach(t=>t.classList.add('visible'));
+      return;
+    }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if (entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.12, rootMargin:'0px 0px -30px 0px' });
+    targets.forEach(t=>io.observe(t));
+  }
+
+  // ---- magnetic buttons (pointer devices only) ----
+  function initMagneticButtons(){
+    if (prefersReducedMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    document.querySelectorAll('.btn-primary, .btn-ghost, .nav-btn').forEach(btn=>{
+      btn.addEventListener('mousemove', (e)=>{
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width/2;
+        const y = e.clientY - r.top - r.height/2;
+        btn.style.transform = `translate(${x*0.18}px, ${y*0.35}px)`;
+      });
+      btn.addEventListener('mouseleave', ()=>{ btn.style.transform = 'translate(0,0)'; });
+    });
+  }
+
+  // ---- animated count-up for stat numbers ----
+  const statPrevValues = {};
+  function animateCount(elId, target){
+    target = parseInt(target, 10) || 0;
+    const el = document.getElementById(elId);
+    const from = statPrevValues[elId] !== undefined ? statPrevValues[elId] : target;
+    statPrevValues[elId] = target;
+    if (prefersReducedMotion || from === target){ el.textContent = target; return; }
+    const duration = 450;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min(1, (now-start)/duration);
+      const eased = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(from + (target-from)*eased);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(tick);
+  }
+
   (async function init(){
     const t = today();
     viewYear = t.getFullYear(); viewMonth = t.getMonth();
     await loadData();
     renderAll();
+    initRevealObserver();
+    initMagneticButtons();
   })();
 })();
 </script>
